@@ -9,6 +9,9 @@ import (
 func ServeMux() http.Handler {
 	mux := http.NewServeMux()
 	mux.HandleFunc("/", controller.HomeHandler)
+	//mux.HandleFunc("signup", controller.SignUpHandler)
+	//mux.HandleFunc("login", controller.LoginHandler)
+	//mux.HandleFunc("logout", controller.LogoutHandler)
 
 	mux.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("./static"))))
 	return mux

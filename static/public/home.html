@@ -15,14 +15,40 @@
         <main>
             <header class="main-header">
                 <div class="main-header-container">
-                    <div>
-
+                    <!--Header Left-->
+                    <div class="main-header-logo">
+                        <a href="#" class="main-header-logo-trigger" aria-label="BEST KEYBOARD">
+                            <p>BEST KEYBOARD</p>
+                        </a>
                     </div>
-                    <div>
 
+                    <!--Header Middle-->
+                    <div class="main-header-search">
+                        <form class="main-header-search-form" action="/search" method="get" role="search" data-container="search-form">
+                            <div class="main-header-search-div" data-container="search-div" data-input="false">
+                                <label class="main-header-search-label">
+                                    <span class="main-header-search-span-icon" aria-label="search" aria-hidden="true"></span>
+                                    <input class="main-header-search-input" type="search" name="p_keyv" value id="searchText" autocomplete="off" data-trigger="searchFromAllItems">
+                                    <button type="button" class="main-header-search-button" aria-label="deleteText" aria-hidden="true" data-trigger="delete"></button>
+                                </label>
+                            </div>
+                            <div id="searchOverlay" class="searchOverlay"></div>
+                        </form>
                     </div>
-                    <div>
 
+                    <!--Header Right-->
+                    <div class="main-header-controller">
+                        <div class="main-header-controller-login" id="loginedUsername">
+                            <a class="main-header-controller-login-url" href="#">Login</a>
+                        </div>
+                        <div class="main-header-controller-fav" id="favoriteLink">
+                            <a class="main-header-favorite" href="#" aria-label="lookAtFavorites">Fav
+                            </a>
+                        </div>
+                        <div class="main-header-controller-user-account">
+                            <a class="main-header-user-account" href="#" aria-label="lookAtUserAccount">Account
+                            </a>
+                        </div>
                     </div>
                 </div>
             </header>
