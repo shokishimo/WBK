@@ -44,6 +44,22 @@ form {
     align-items: center;
 }
 
+.main-header-logo-trigger {
+    position: relative;
+    display: flex;
+    align-items: center;
+    height: 100%;
+    cursor: pointer;
+
+    width: 150px;
+    background-image: url("../images/siteLogo.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    border: none;
+    z-index: 999;
+}
+
 /* Header Middle */
 .main-header-search {
     display: flex;
@@ -92,6 +108,12 @@ form {
     background-color: rgba(0, 0, 0, 20%);
     border: 0;
     border-radius: 100%;
+
+    background-image: url("../images/deleteLogo.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    border: none;
 }
 
 /* Header Right */
@@ -113,6 +135,22 @@ form {
     margin-right: 30px;
 }
 
+.main-header-controller-login-logo {
+    position: relative;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+
+    height: 100%;
+    width: 35px;
+    background-image: url("../images/loginLogo.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    border: none;
+    z-index: 999;
+}
+
     /*fav*/
 .main-header-controller-fav {
     position: relative;
@@ -123,6 +161,14 @@ form {
     font-weight: bold;
     cursor: pointer;
     margin-right: 30px;
+
+    width: 18px;
+    background-image: url("../images/favLogo.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    border: none;
+    z-index: 999;
 }
 
     /*account*/
@@ -131,7 +177,13 @@ form {
     display: flex;
     align-items: center;
     height: 100%;
-    font-size: 12px;
-    font-weight: bold;
     cursor: pointer;
+
+    width: 40px;
+    background-image: url("../images/accountLogo.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    border: none;
+    z-index: 999;
 }
