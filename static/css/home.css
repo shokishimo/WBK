@@ -60,10 +60,13 @@ form {
     position: relative;
 }
 
-.main-header-search-span-icon {
+.main-header-search-icon {
     position: relative;
-    left: 15px;
+    margin-right: -25px;
     color: #2d2d2d;
+    width: 20px;
+    height: 20px;
+    z-index: 999;
 }
 
 .main-header-search-input {
@@ -98,7 +101,7 @@ form {
     justify-content: space-between;
 }
 
-/*login*/
+    /*login*/
 .main-header-controller-login {
     position: relative;
     display: flex;
@@ -110,7 +113,7 @@ form {
     margin-right: 30px;
 }
 
-/*fav*/
+    /*fav*/
 .main-header-controller-fav {
     position: relative;
     display: flex;
@@ -122,7 +125,7 @@ form {
     margin-right: 30px;
 }
 
-/*account*/
+    /*account*/
 .main-header-controller-user-account {
     position: relative;
     display: flex;

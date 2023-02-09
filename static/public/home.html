@@ -24,15 +24,14 @@
 
                     <!--Header Middle-->
                     <div class="main-header-search">
+                        <img class="main-header-search-icon" src="/static/images/searchLogo.png" aria-label="search" aria-hidden="false">
                         <form class="main-header-search-form" action="/search" method="get" role="search" data-container="search-form">
-                            <div class="main-header-search-div" data-container="search-div" data-input="false">
+                            <div class="main-header-search-div" data-container="search-div" data-input="true">
                                 <label class="main-header-search-label">
-                                    <span class="main-header-search-span-icon" aria-label="search" aria-hidden="true"></span>
                                     <input class="main-header-search-input" type="search" name="p_keyv" value id="searchText" autocomplete="off" data-trigger="searchFromAllItems">
                                     <button type="button" class="main-header-search-button" hidden="until-found" aria-label="deleteText" aria-hidden="false" data-trigger="delete"></button>
                                 </label>
                             </div>
-                            <div id="searchOverlay" class="searchOverlay"></div>
                         </form>
                     </div>
 
