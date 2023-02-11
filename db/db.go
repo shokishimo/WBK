@@ -14,8 +14,7 @@ func Connect() *mongo.Client {
 	var client *mongo.Client
 	var uri string
 	if err := godotenv.Load(); err != nil {
-		log.Println("No .env file found")
-		return nil
+		log.Fatal("No .env file found")
 	}
 	uri = os.Getenv("MONGODB_URI")
 	if uri == "" {
@@ -23,8 +22,7 @@ func Connect() *mongo.Client {
 	}
 	client, err := mongo.Connect(context.TODO(), options.Client().ApplyURI(uri))
 	if err != nil {
-		log.Println("Failed to connect to db")
-		return nil
+		log.Fatal("Failed to connect to db")
 	}
 	fmt.Println("Success in connecting to MongoDB")
 	return client
@@ -32,8 +30,7 @@ func Connect() *mongo.Client {
 
 func Disconnect(client *mongo.Client) {
 	if err := client.Disconnect(context.TODO()); err != nil {
-		log.Println("Failed to disconnect from db")
-		return
+		log.Fatal("Failed to disconnect from db")
 	}
 	fmt.Println("Disconnected from MongoDB")
 }
