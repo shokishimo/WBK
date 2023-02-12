@@ -50,6 +50,7 @@ func AddSampleData() {
 		Switch:   "mechanical",
 		Material: model.Material{},
 		Ranking:  "1",
+		Score:    "8.5",
 	}
 	fmt.Println(data1)
 	// begin insert data

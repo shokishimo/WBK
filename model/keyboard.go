@@ -9,4 +9,5 @@ type Keyboard struct {
 	Switch   string   `json:"switch"`
 	Material Material `json:"material"`
 	Ranking  string   `json:"ranking"`
+	Score    string   `json:"score"`
 }
