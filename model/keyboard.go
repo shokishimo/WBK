@@ -10,4 +10,5 @@ type Keyboard struct {
 	Material Material `json:"material"`
 	Ranking  string   `json:"ranking"`
 	Score    string   `json:"score"`
+	Url      string   `json:"url"`
 }

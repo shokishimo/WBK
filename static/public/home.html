@@ -11,45 +11,55 @@
 <body>
     <div id="body-container">
 
+<!--header-->
+        <header class="main-header">
+            <div class="main-header-container">
+                <!--Header Left-->
+                <div class="main-header-logo">
+                    <div href="#" class="main-header-logo-trigger" aria-label="BEST KEYBOARD"></div>
+                </div>
 
-        <main>
-            <header class="main-header">
-                <div class="main-header-container">
-                    <!--Header Left-->
-                    <div class="main-header-logo">
-                        <div href="#" class="main-header-logo-trigger" aria-label="BEST KEYBOARD"></div>
+                <!--Header Middle-->
+                <div class="main-header-search">
+                    <img class="main-header-search-icon" src="/static/images/searchLogo.png" aria-label="search" aria-hidden="false">
+                    <form class="main-header-search-form" action="/search" method="get" role="search" data-container="search-form">
+                        <div class="main-header-search-div" data-container="search-div" data-input="true">
+                            <label class="main-header-search-label">
+                                <input class="main-header-search-input" type="search" name="p_keyv" value id="searchText" autocomplete="off" data-trigger="searchFromAllItems">
+                                <button type="button" class="main-header-search-button" hidden="until-found" aria-label="deleteText" aria-hidden="false" data-trigger="delete"></button>
+                            </label>
+                        </div>
+                    </form>
+                </div>
+
+                <!--Header Right-->
+                <div class="main-header-controller">
+                    <div class="main-header-controller-login" id="loginedUsername">
+                        <div class="main-header-controller-login-logo" href="#"></div>
                     </div>
-
-                    <!--Header Middle-->
-                    <div class="main-header-search">
-                        <img class="main-header-search-icon" src="/static/images/searchLogo.png" aria-label="search" aria-hidden="false">
-                        <form class="main-header-search-form" action="/search" method="get" role="search" data-container="search-form">
-                            <div class="main-header-search-div" data-container="search-div" data-input="true">
-                                <label class="main-header-search-label">
-                                    <input class="main-header-search-input" type="search" name="p_keyv" value id="searchText" autocomplete="off" data-trigger="searchFromAllItems">
-                                    <button type="button" class="main-header-search-button" hidden="until-found" aria-label="deleteText" aria-hidden="false" data-trigger="delete"></button>
-                                </label>
-                            </div>
-                        </form>
+                    <div class="main-header-controller-fav" id="favoriteLink">
+                        <div class="main-header-favorite" href="#" aria-label="lookAtFavorites"></div>
                     </div>
-
-                    <!--Header Right-->
-                    <div class="main-header-controller">
-                        <div class="main-header-controller-login" id="loginedUsername">
-                            <div class="main-header-controller-login-logo" href="#"></div>
-                        </div>
-                        <div class="main-header-controller-fav" id="favoriteLink">
-                            <div class="main-header-favorite" href="#" aria-label="lookAtFavorites"></div>
-                        </div>
-                        <div class="main-header-controller-user-account">
-                            <div class="main-header-user-account" href="#" aria-label="lookAtUserAccount"></div>
-                        </div>
+                    <div class="main-header-controller-user-account">
+                        <div class="main-header-user-account" href="#" aria-label="lookAtUserAccount"></div>
                     </div>
                 </div>
-            </header>
+            </div>
+        </header>
 
+<!--main-->
+        <main>
+
+            <div class="">
+
+            </div>
 
         </main>
+
+<!--footer-->
+        <footer>
+            <p>Copyright 2023 What's the Best Keyboard. All rights reserved.</p>
+        </footer>
     </div>
 </body>
 </html>
