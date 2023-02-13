@@ -188,12 +188,42 @@ form {
 /*------------ Main ------------*/
 
 /*Headline part*/
+.headline {
+    text-align: center;
+    padding: 10px;
+}
 
 /*Ranking part*/
 .ranking-container {
     position: relative;
     display: flex;
     justify-content: center;
+}
+
+.ranking {
+    padding-left: 30px;
+}
+
+.picture {
+    height: 230px;
+    width: 300px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    border: none;
+    z-index: 999;
+}
+
+#picture1 {
+    background-image: url("../images/NuphyHalo65.png");
+}
+
+#picture2 {
+    background-image: url("../images/NuphyAir75.png");
+}
+
+#picture3 {
+    background-image: url("../images/KeychronK2.png");
 }
 
 /*------------ Footer ------------*/
