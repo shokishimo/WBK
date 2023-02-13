@@ -1,6 +1,6 @@
 async function sendGetRequest(query) {
     try {
-        const response = await fetch(`/getRanking?number=${query}`);
+        const response = await fetch(`https://bestkeyboard.onrender.com/getRanking?number=${query}`);
         return await response.json();
     } catch (error) {
         console.log(error);
