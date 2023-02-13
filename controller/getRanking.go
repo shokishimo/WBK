@@ -27,6 +27,7 @@ func GetRankingHandler(w http.ResponseWriter, r *http.Request) {
 		fmt.Println(err.Error())
 		return
 	}
+	// TODO: Add query validation here
 
 	// database connection
 	godotenv.Load()
