@@ -13,6 +13,7 @@ func ServeMux() http.Handler {
 	//mux.HandleFunc("login", controller.LoginHandler)
 	//mux.HandleFunc("logout", controller.LogoutHandler)
 	mux.HandleFunc("/createNewKeyboard", controller.CreateNewKeyboardHandler)
+	mux.HandleFunc("/getRanking", controller.GetRankingHandler)
 
 	mux.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("./static"))))
 	return mux

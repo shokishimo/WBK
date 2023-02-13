@@ -212,7 +212,8 @@ form {
     background-position: center;
     background-size: contain;
     border: none;
-    z-index: 900;
+    z-index: 999;
+    cursor: pointer;
 }
 
 #picture1 {
