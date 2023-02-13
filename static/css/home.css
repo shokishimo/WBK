@@ -217,15 +217,15 @@ form {
 }
 
 #picture1 {
-    background-image: url("../images/NuphyHalo65.png");
+    background-image: url("/static/images/NuphyHalo65.png");
 }
 
 #picture2 {
-    background-image: url("../images/NuphyAir75.png");
+    background-image: url("/static/images/NuphyAir75.png");
 }
 
 #picture3 {
-    background-image: url("../images/KeychronK2.png");
+    background-image: url("/static/images/KeychronK2.png");
 }
 
 
@@ -240,13 +240,6 @@ form {
     position: absolute;
     top: 0;
     left: 0;
-}
-
-.ranking-letter {
-    font-size: 18px;
-    padding-left: 11px;
-    padding-top: 4px;
-    color: #fff;
 }
 
 #ranking-badge1 {
