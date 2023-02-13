@@ -187,6 +187,14 @@ form {
 
 /*------------ Main ------------*/
 
+/*Headline part*/
+
+/*Ranking part*/
+.ranking-container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+}
 
 /*------------ Footer ------------*/
 footer {
