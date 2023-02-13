@@ -1,8 +1,7 @@
 async function sendGetRequest(query) {
     try {
         const response = await fetch(`/getRanking?number=${query}`);
-        const data = await response.json();
-        return data
+        return await response.json();
     } catch (error) {
         console.log(error);
     }
