@@ -201,7 +201,8 @@ form {
 }
 
 .ranking {
-    padding-left: 30px;
+    padding-right: 30px;
+    position: relative;
 }
 
 .picture {
@@ -211,7 +212,7 @@ form {
     background-position: center;
     background-size: contain;
     border: none;
-    z-index: 999;
+    z-index: 900;
 }
 
 #picture1 {
@@ -224,6 +225,39 @@ form {
 
 #picture3 {
     background-image: url("../images/KeychronK2.png");
+}
+
+
+.ranking-badge {
+    height: 30px;
+    width: 30px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    border: none;
+    z-index: 999;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.ranking-letter {
+    font-size: 18px;
+    padding-left: 11px;
+    padding-top: 4px;
+    color: #fff;
+}
+
+#ranking-badge1 {
+    background-image: url("../images/rankingBadge1.png");
+}
+
+#ranking-badge2 {
+    background-image: url("../images/rankingBadge2.png");
+}
+
+#ranking-badge3 {
+    background-image: url("../images/rankingBadge3.png");
 }
 
 /*------------ Footer ------------*/
