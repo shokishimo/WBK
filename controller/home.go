@@ -1,6 +1,7 @@
 package controller
 
 import (
+	"github.com/shokishimo/WhatsTheBestKeyboard/model"
 	"html/template"
 	"net/http"
 )
@@ -21,5 +22,8 @@ func ServePublicHome(w http.ResponseWriter) {
 		w.Write([]byte(err.Error()))
 		return
 	}
-	tmpl.Execute(w, nil)
+
+	keyboards := model.GetRanks(3)
+
+	tmpl.Execute(w, keyboards)
 }
