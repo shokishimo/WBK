@@ -4,11 +4,9 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
-	"github.com/joho/godotenv"
 	"github.com/shokishimo/WhatsTheBestKeyboard/db"
 	"github.com/shokishimo/WhatsTheBestKeyboard/model"
 	"net/http"
-	"os"
 )
 
 func CreateNewKeyboardHandler(w http.ResponseWriter, r *http.Request) {
@@ -25,18 +23,12 @@ func CreateNewKeyboardHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	godotenv.Load()
-	database := os.Getenv("DATABASE")
-	keyboardCollection := os.Getenv("COLLECTION_Keyboard")
-	if database == "" || keyboardCollection == "" {
-		fmt.Println("failed to get access keys to database")
-	}
 	client := db.Connect()
-	// Disconnect from db
 	defer db.Disconnect(client)
+	// Obtain collection
+	collection := db.GetAccessKeysToKeyboardsCollection(client)
 
 	// begin insert data
-	collection := client.Database(database).Collection(keyboardCollection)
 	a, err := collection.InsertOne(context.TODO(), keyboard)
 	fmt.Println(a)
 	if err != nil {

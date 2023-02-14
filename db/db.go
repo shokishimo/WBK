@@ -34,3 +34,14 @@ func Disconnect(client *mongo.Client) {
 	}
 	fmt.Println("Disconnected from MongoDB")
 }
+
+func GetAccessKeysToKeyboardsCollection(client *mongo.Client) *mongo.Collection {
+	godotenv.Load()
+	database := os.Getenv("DATABASE")
+	keyboardCollection := os.Getenv("COLLECTION_Keyboard")
+	if database == "" || keyboardCollection == "" {
+		fmt.Println("failed to get access keys to database")
+	}
+	collection := client.Database(database).Collection(keyboardCollection)
+	return collection
+}

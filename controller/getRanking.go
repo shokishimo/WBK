@@ -4,13 +4,11 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
-	"github.com/joho/godotenv"
 	"github.com/shokishimo/WhatsTheBestKeyboard/db"
 	"github.com/shokishimo/WhatsTheBestKeyboard/model"
 	"go.mongodb.org/mongo-driver/bson"
 	"log"
 	"net/http"
-	"os"
 	"strconv"
 )
 
@@ -29,17 +27,10 @@ func GetRankingHandler(w http.ResponseWriter, r *http.Request) {
 	}
 	// TODO: Add query validation here
 
-	// database connection
-	godotenv.Load()
-	database := os.Getenv("DATABASE")
-	keyboardCollection := os.Getenv("COLLECTION_Keyboard")
-	if database == "" || keyboardCollection == "" {
-		fmt.Println("failed to get access keys to database")
-	}
 	client := db.Connect()
-	// Disconnect from db
 	defer db.Disconnect(client)
-	collection := client.Database(database).Collection(keyboardCollection)
+	// Obtain collection
+	collection := db.GetAccessKeysToKeyboardsCollection(client)
 
 	// extract keyboard data from database based on their net ranking
 	var keyboards []model.Keyboard
