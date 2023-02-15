@@ -216,19 +216,6 @@ form {
     cursor: pointer;
 }
 
-#picture1 {
-    background-image: url("/static/images/NuphyHalo65.png");
-}
-
-#picture2 {
-    background-image: url("/static/images/NuphyAir75.png");
-}
-
-#picture3 {
-    background-image: url("/static/images/KeychronK2.png");
-}
-
-
 .ranking-badge {
     height: 30px;
     width: 30px;
@@ -243,15 +230,22 @@ form {
 }
 
 #ranking-badge1 {
-    background-image: url("../images/rankingBadge1.png");
+    background-image: url("/static/images/rankingBadge1.png");
 }
 
 #ranking-badge2 {
-    background-image: url("../images/rankingBadge2.png");
+    background-image: url("/static/images/rankingBadge2.png");
 }
 
 #ranking-badge3 {
-    background-image: url("../images/rankingBadge3.png");
+    background-image: url("/static/images/rankingBadge3.png");
+}
+
+.ranking-letter {
+    font-size: 18px;
+    padding-left: 11px;
+    padding-top: 4px;
+    color: #fff;
 }
 
 /*------------ Footer ------------*/
