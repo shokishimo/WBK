@@ -33,9 +33,9 @@
 
                 <!--Header Right-->
                 <div class="main-header-controller">
-                    <div class="main-header-controller-login" id="loginedUsername">
-                        <div class="main-header-controller-login-logo" href="#"></div>
-                    </div>
+                    <form class="main-header-controller-login" id="loginedUsername" action="/login" method="get" onclick="submitLoginForm()">
+                        <div class="main-header-controller-login-logo"></div>
+                    </form>
                     <div class="main-header-controller-fav" id="favoriteLink">
                         <div class="main-header-favorite" href="#" aria-label="lookAtFavorites"></div>
                     </div>
@@ -64,8 +64,11 @@
                                     <div class="ranking-badge" id="ranking-badge1">
                                         <p class="ranking-letter">{{.Ranking}}</p>
                                     </div>
+                                    <div class="make">{{.Make}}</div>
                                 </div>
-                                <div class="description"></div>
+                                <div class="description">{{.Name}}</div>
+                                <div class="price">{{.Price}}</div>
+                                <div class="score">Score: {{.Score}} /10 &nbsp; (# Votes: {{.NumVotes}})</div>
                             </div>
                         {{else if eq .Ranking "2"}}
                             <div class="ranking">
@@ -74,10 +77,11 @@
                                     <div class="ranking-badge" id="ranking-badge2">
                                         <p class="ranking-letter">{{.Ranking}}</p>
                                     </div>
+                                    <div class="make">{{.Make}}</div>
                                 </div>
-                                <div class="description">
-
-                                </div>
+                                <div class="description">{{.Name}}</div>
+                                <div class="price">{{.Price}}</div>
+                                <div class="score">Score: {{.Score}} /10 &nbsp; (# Votes: {{.NumVotes}})</div>
                             </div>
                         {{else if eq .Ranking "3"}}
                             <div class="ranking">
@@ -86,10 +90,11 @@
                                     <div class="ranking-badge" id="ranking-badge3">
                                         <p class="ranking-letter">{{.Ranking}}</p>
                                     </div>
+                                    <div class="make">{{.Make}}</div>
                                 </div>
-                                <div class="description">
-
-                                </div>
+                                <div class="description">{{.Name}}</div>
+                                <div class="price">{{.Price}}</div>
+                                <div class="score">Score: {{.Score}} /10 &nbsp; (# Votes: {{.NumVotes}})</div>
                             </div>
                         {{end}}
                     {{end}}
@@ -98,16 +103,17 @@
                     {{range .}}
                         {{if ge .Ranking "4"}}
                             <div class="ranking">
-                        <div class="picture-container">
-                            <img  class="picture" src={{.Url}} alt="keyboard image">
-                            <div class="ranking-badge" id="ranking-badge">
-                                <p class="ranking-letter">{{.Ranking}}</p>
+                                <div class="picture-container">
+                                    <img  class="picture" src={{.Url}} alt="keyboard image">
+                                    <div class="ranking-badge" id="ranking-badge">
+                                        <p class="ranking-letter">{{.Ranking}}</p>
+                                    </div>
+                                    <div class="make">{{.Make}}</div>
+                                </div>
+                                <div class="description">{{.Name}}</div>
+                                <div class="price">{{.Price}}</div>
+                                <div class="score">Score: {{.Score}} /10 &nbsp; (# Votes: {{.NumVotes}})</div>
                             </div>
-                        </div>
-                        <div class="description">
-
-                        </div>
-                    </div>
                         {{end}}
                     {{end}}
                 </div>

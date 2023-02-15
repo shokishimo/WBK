@@ -198,6 +198,7 @@ form {
     position: relative;
     display: flex;
     justify-content: center;
+    padding-bottom: 30px;
 }
 
 .ranking {
@@ -239,6 +240,10 @@ form {
 
 #ranking-badge3 {
     background-image: url("/static/images/rankingBadge3.png");
+}
+
+#ranking-badge {
+    background-color: rgba(0,0,0,.2);
 }
 
 .ranking-letter {

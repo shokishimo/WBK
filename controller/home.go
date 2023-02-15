@@ -23,7 +23,7 @@ func ServePublicHome(w http.ResponseWriter) {
 		return
 	}
 
-	keyboards := model.GetRanks(3)
+	keyboards := model.GetRanks(4)
 	w.Header().Set("Content-Type", "text/html")
 	err = tmpl.Execute(w, keyboards)
 	if err != nil {
