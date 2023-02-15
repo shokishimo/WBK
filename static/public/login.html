@@ -22,7 +22,31 @@
 
     <!--main-->
     <main>
+        <div class="container">
+            <h1>Login</h1>
+            <div class="login-error"></div>
+            <div class="login-container">
+                <form class="login-form" method="post" action="/login">
+                    <div class="login-content">
+                        <div class="email-and-password">
+                            <p id="email-id" class="email-class">
+                                <label class="email-label">Email</label>
+                                <input type="text" id="email-input">
+                            </p>
+                            <p id="password-id" class="password-class">
+                                <label class="password-label">Password</label>
+                                <input type="text" id="password-input">
+                            </p>
+                        </div>
+                        <p class="forget-p"><a class="forget-a" href="/forget">Forgot your password?</a></p>
+                    </div>
 
+                    <div class="form-submit-button">
+                        <input type="submit" class="submit-button" value="Login">
+                    </div>
+                </form>
+            </div>
+        </div>
     </main>
 
     <!--footer-->
@@ -32,6 +56,7 @@
 </div>
 
     <link rel="stylesheet" href="/static/css/home.css">
+    <link rel="stylesheet" href="/static/css/login.css">
     <script>
         function submitHomeForm() {
             document.getElementById("home").submit();
