@@ -1,3 +1,8 @@
 .container {
     text-align: center;
+    width: 760px;
+    padding: 40px 0 40px;
+    margin: 45px auto 40px;
+    background-color: #efefef;
+    border-radius: 10px;
 }
