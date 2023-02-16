@@ -7,19 +7,12 @@ body, h1, h2, h3, h4, h5, h6, p, figure, blockquote, dl, dd, button, input, sele
 }
 form {
     display: block;
-    margin-top: 0em;
-}
-[tabindex='0'], a[href], button, input, label, select, textarea, summary {
-    touch-action: manipulation;
-}
-
-[tabindex='0'], a[href], button, [type='button'], [type='reset'], [type='submit'], [role='button'], label, select, summary {
-    cursor: pointer;
+    margin-top: 0;
 }
 
 /*------------ Header ------------*/
 .main-header {
-    position: sticky;
+    position: relative;
     top: 0;
     right: 0;
     left: 0;
@@ -35,7 +28,6 @@ form {
     justify-content: space-evenly;
     height: 50px;
     padding: 0;
-    margin: 0 auto;
 }
 
 /* Header Left */
@@ -82,7 +74,7 @@ form {
     color: #2d2d2d;
     width: 20px;
     height: 20px;
-    z-index: 999;
+    z-index: 100;
 }
 
 .main-header-search-input {
@@ -147,7 +139,7 @@ form {
     background-position: center;
     background-size: contain;
     border: none;
-    z-index: 999;
+    z-index: 100;
 }
 
     /*fav*/
@@ -165,7 +157,7 @@ form {
     background-position: center;
     background-size: contain;
     border: none;
-    z-index: 999;
+    z-index: 100;
 }
 
     /*account*/
@@ -182,7 +174,7 @@ form {
     background-position: center;
     background-size: contain;
     border: none;
-    z-index: 999;
+    z-index: 100;
 }
 
 /*------------ Main ------------*/
@@ -213,7 +205,7 @@ form {
     background-position: center;
     background-size: contain;
     border: none;
-    z-index: 999;
+    z-index: 1;
     cursor: pointer;
 }
 
@@ -224,7 +216,7 @@ form {
     background-position: center;
     background-size: contain;
     border: none;
-    z-index: 999;
+    z-index: 1;
     position: absolute;
     top: 0;
     left: 0;
