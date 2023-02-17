@@ -1,5 +1,18 @@
 .container {
+    position: relative;
     text-align: center;
+    width: 760px;
+    padding: 20px 0 30px;
+    margin: 20px auto 20px;
+    background-color: #efefef;
+    border-radius: 10px;
+}
+
+/* Use a media query to add a breakpoint at 800px: */
+@media screen and (max-width: 800px) {
+    .container{
+        width: 100%; /* The width is 100%, when the viewport is 800px or smaller */
+    }
 }
 
 p {
@@ -7,7 +20,45 @@ p {
 }
 
 .Login {
-    margin-top: 20px;
+    font-size: 20px;
+    padding-bottom: 20px;
+}
+
+.email-class {
+    padding-right: 220px;
+    margin-bottom: 5px;
+}
+
+.input {
+    width: 250px;
     margin-bottom: 20px;
+    padding-left: 10px;
+    border-radius: 10px;
+    border-width: 1px;
+    outline-color: green;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-size: 16px;
+}
+
+.password-class {
+    padding-right: 190px;
+}
+
+.forget-p {
+    margin-left: 80px;
+    margin-top: -10px;
+    font-size: 14px;
+}
+
+.submit-button {
     font-size: 18px;
+    color: white;
+    border-radius: 10px;
+    border: none;
+    background-color: limegreen;
+    padding: 10px 100px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-weight: bold;
 }
