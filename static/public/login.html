@@ -23,20 +23,20 @@
     <!--main-->
     <main>
         <div class="container">
-            <h1>Login</h1>
+            <p class="Login">Login</p>
             <div class="login-error"></div>
             <div class="login-container">
                 <form class="login-form" method="post" action="/login">
                     <div class="login-content">
                         <div class="email-and-password">
-                            <p id="email-id" class="email-class">
-                                <label class="email-label">Email</label>
-                                <input type="text" id="email-input">
-                            </p>
-                            <p id="password-id" class="password-class">
-                                <label class="password-label">Password</label>
-                                <input type="text" id="password-input">
-                            </p>
+                            <div>
+                                <p id="email-id" class="email-class">Email</p>
+                                <input type="text" id="email-input" placeholder="email">
+                            </div>
+                            <div>
+                                <p id="password-id" class="password-class">Password</p>
+                                <input type="text" id="password-input" placeholder="password">
+                            </div>
                         </div>
                         <p class="forget-p"><a class="forget-a" href="/forget">Forgot your password?</a></p>
                     </div>
