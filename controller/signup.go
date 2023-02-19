@@ -1,8 +1,10 @@
 package controller
 
 import (
+	"fmt"
 	"html/template"
 	"net/http"
+	"os/user"
 )
 
 func SignUpHandler(w http.ResponseWriter, r *http.Request) {
@@ -22,7 +24,40 @@ func SignUpHandler(w http.ResponseWriter, r *http.Request) {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return
 		}
-	} else if r.Method == http.MethodPost {
 
+	} else if r.Method == http.MethodPost { // handle POST method
+		signUpPost(w, r)
+
+	} else { // others
+		w.WriteHeader(http.StatusMethodNotAllowed)
 	}
+	return
+}
+
+// signUpPost saves a user signed up
+func signUpPost(w http.ResponseWriter, r *http.Request) {
+	sessionID := user.GenerateSessionID()
+	theUser := user.User{
+		Username:  r.FormValue("username"),
+		Password:  user.Hash(r.FormValue("password")),
+		SessionID: user.Hash(sessionID),
+	}
+	// TODO: validate the user input
+
+	// TODO: check if the input user already exists in the database
+
+	// save the user
+	err := user.SaveUser(theUser)
+	if err != nil {
+		fmt.Fprint(w, err.Error())
+		return
+	}
+	// success log
+	fmt.Println("successfully inserted the user")
+
+	// save the cookie in the client browser
+	user.SetCookie(w, sessionID)
+
+	// Redirect to account home page
+	http.Redirect(w, r, "/", http.StatusSeeOther)
 }
