@@ -9,9 +9,10 @@ import (
 func ServeMux() http.Handler {
 	mux := http.NewServeMux()
 	mux.HandleFunc("/", controller.HomeHandler)
-	//mux.HandleFunc("signup", controller.SignUpHandler)
+	mux.HandleFunc("/signup", controller.SignUpHandler)
 	mux.HandleFunc("/login", controller.LoginHandler)
-	//mux.HandleFunc("logout", controller.LogoutHandler)
+	//mux.HandleFunc("/logout", controller.LogoutHandler)
+	mux.HandleFunc("/forget", controller.ForgetHandler)
 
 	mux.HandleFunc("/createNewKeyboard", controller.CreateNewKeyboardHandler)
 	mux.HandleFunc("/getRanking", controller.GetRankingHandler)
