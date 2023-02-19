@@ -88,10 +88,6 @@ body {
     transition: .5s;
 }
 
-.button-form {
-    transform: translateX(32%)
-}
-
 .submit-button {
     padding: 10px 20px;
     color: lightgreen;
@@ -102,8 +98,8 @@ body {
     transition: .5s;
     letter-spacing: 4px;
     border: 2px solid lightgreen;
-    left: 50%;
     border-radius: 8px;
+    transform: translateX(90%);
 }
 
 .submit-button:hover {
@@ -111,7 +107,7 @@ body {
 }
 
 #login {
-    font-size: 14px;
+    font-size: 15px;
     text-transform: none;
     margin: auto;
     padding-top: 15px;
@@ -121,7 +117,7 @@ body {
 
 #login a {
     margin: auto;
-    color: #3e3e3e;
+    color: mediumpurple;
     text-decoration: none;
 }
 
@@ -135,4 +131,11 @@ footer {
     background-color: #3e3e3e;
     padding: 2rem 0;
     text-align: center;
+}
+
+/* Use a media query to add a breakpoint at 800px: */
+@media screen and (max-width: 500px) {
+    .signup-box {
+        width: 300px;
+    }
 }
