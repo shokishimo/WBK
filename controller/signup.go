@@ -34,7 +34,14 @@ func SignUpHandler(w http.ResponseWriter, r *http.Request) {
 
 // signUpPost saves a user signed up
 func signUpPost(w http.ResponseWriter, r *http.Request) {
-	//sessionID := user.GenerateSessionID()
+	email := r.FormValue("email")
+	password := r.FormValue("password")
+	result := validateSignupInput(email, password)
+	if !result {
+		w.WriteHeader(http.StatusBadRequest)
+		return
+	}
+	sessionID := GenerateSessionID()
 	//theUser := user.User{
 	//	Username:  r.FormValue("username"),
 	//	Password:  user.Hash(r.FormValue("password")),
