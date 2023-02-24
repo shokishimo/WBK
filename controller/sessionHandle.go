@@ -2,6 +2,7 @@ package controller
 
 import (
 	"crypto/rand"
+	"crypto/sha256"
 	"encoding/hex"
 	"log"
 	"net/mail"
@@ -17,6 +18,15 @@ func GenerateSessionID() string {
 	}
 	sessionID := hex.EncodeToString(b)
 	return sessionID
+}
+
+// Hash hashes the input and return the hashed value
+func Hash(val string) string {
+	// Hash the password
+	hash := sha256.Sum256([]byte(val))
+	// Encode the hash as a hexadecimal string
+	hashed := hex.EncodeToString(hash[:])
+	return hashed
 }
 
 // ValidateSignupInput validates user input to signup or login
