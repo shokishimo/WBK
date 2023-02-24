@@ -10,6 +10,7 @@ func ServeMux() http.Handler {
 	mux := http.NewServeMux()
 	mux.HandleFunc("/", controller.HomeHandler)
 	mux.HandleFunc("/signup", controller.SignUpHandler)
+	mux.HandleFunc("/verifyPasscode", controller.PasscodeVerificationHandler)
 	mux.HandleFunc("/login", controller.LoginHandler)
 	//mux.HandleFunc("/logout", controller.LogoutHandler)
 	mux.HandleFunc("/forget", controller.ForgetHandler)

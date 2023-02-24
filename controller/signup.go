@@ -6,12 +6,13 @@ import (
 	"github.com/shokishimo/WhatsTheBestKeyboard/model"
 	"go.mongodb.org/mongo-driver/bson"
 	"html/template"
+	"log"
 	"net/http"
 	"strings"
 )
 
 func SignUpHandler(w http.ResponseWriter, r *http.Request) {
-	if r.Method == http.MethodGet {
+	if r.Method == http.MethodGet { // handle GET method
 		tmpl, err := template.ParseFiles("static/public/signup.html")
 		if err != nil {
 			_, err := w.Write([]byte(err.Error()))
@@ -32,8 +33,15 @@ func SignUpHandler(w http.ResponseWriter, r *http.Request) {
 		errorMessage := signUpPost(w, r)
 		if errorMessage != "" {
 			// render error message
-
+			_, err := w.Write([]byte(errorMessage))
+			if err != nil {
+				return
+			}
 		}
+		// if sign up ok, now passcode check
+		// Redirect to account home page
+		http.Redirect(w, r, "/verifyPasscode", http.StatusSeeOther)
+
 	} else { // others
 		w.WriteHeader(http.StatusMethodNotAllowed)
 	}
@@ -49,7 +57,7 @@ func signUpPost(w http.ResponseWriter, r *http.Request) string {
 		w.WriteHeader(http.StatusBadRequest)
 		return "http.StatusBadRequest"
 	}
-	sessionID := GenerateSessionID()
+	// parse username from email
 	separatedEmail := strings.Split(email, "@")
 	username := separatedEmail[len(separatedEmail)-2]
 
@@ -57,7 +65,7 @@ func signUpPost(w http.ResponseWriter, r *http.Request) string {
 		Username:  username,
 		Email:     email,
 		Password:  Hash(password),
-		SessionID: Hash(sessionID),
+		SessionID: GeneratePasscode(),
 		Fav:       []model.Keyboard{},
 		BestKeys:  []model.Keyboard{},
 		WorstKeys: []model.Keyboard{},
@@ -76,21 +84,18 @@ func signUpPost(w http.ResponseWriter, r *http.Request) string {
 		return "http.StatusNotAcceptable; already a user with the same email exists"
 	}
 
-	// TODO: send email to let them validate the their email address
-
 	// save the user
-
-	//err := user.SaveUser(theUser)
-	//if err != nil {
-	//	fmt.Fprint(w, err.Error())
-	//	return
-	//}
+	err := model.SaveUserToUsersCollection(theUser, collection)
+	if err != nil {
+		w.WriteHeader(http.StatusInternalServerError)
+		log.Fatal(err.Error())
+		return "Failed to save the user"
+	}
 	//// success log
 	//fmt.Println("successfully inserted the user")
 	//
-	//// save the cookie in the client browser
-	//user.SetCookie(w, sessionID)
-	//
-	//// Redirect to account home page
-	//http.Redirect(w, r, "/", http.StatusSeeOther)
+
+	// TODO: send email to let them validate the their email address
+
+	return ""
 }

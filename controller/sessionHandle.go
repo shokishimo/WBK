@@ -1,15 +1,17 @@
 package controller
 
 import (
-	"crypto/rand"
 	"crypto/sha256"
 	"encoding/hex"
+	"fmt"
 	"log"
+	"math/rand"
 	"net/mail"
 	"regexp"
+	"time"
 )
 
-// GenerateSessionID Generates a sessionID
+// GenerateSessionID generates a sessionID
 func GenerateSessionID() string {
 	b := make([]byte, 16)
 	_, err := rand.Read(b)
@@ -18,6 +20,17 @@ func GenerateSessionID() string {
 	}
 	sessionID := hex.EncodeToString(b)
 	return sessionID
+}
+
+// GeneratePasscode generates a passcode of length 6
+func GeneratePasscode() string {
+	// initialize the random number generator
+	rand.Seed(time.Now().UnixNano())
+	// generate a random integer between 0 and 999999 (inclusive)
+	randomInt := rand.Intn(1000000)
+	// format the integer as a string with leading zeros and length 6
+	passcode := fmt.Sprintf("%06d", randomInt)
+	return passcode
 }
 
 // Hash hashes the input and return the hashed value
