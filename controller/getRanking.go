@@ -19,7 +19,7 @@ func GetRankingHandler(w http.ResponseWriter, r *http.Request) {
 	queryParams := r.URL.Query()
 	numberOfData, err := strconv.Atoi(queryParams.Get("number"))
 	if err != nil {
-		fmt.Println(err.Error())
+		fmt.Println(err.Error() + "at GetRankingHandler function")
 		return
 	}
 	// TODO: Add query validation here
