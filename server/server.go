@@ -13,7 +13,6 @@ func ServeMux() http.Handler {
 	mux.HandleFunc("/login", controller.LoginHandler)
 	//mux.HandleFunc("/logout", controller.LogoutHandler)
 	mux.HandleFunc("/forget", controller.ForgetHandler)
-
 	mux.HandleFunc("/createNewKeyboard", controller.CreateNewKeyboardHandler)
 	mux.HandleFunc("/getRanking", controller.GetRankingHandler)
 

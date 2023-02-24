@@ -2,7 +2,6 @@ package db
 
 import (
 	"context"
-	"fmt"
 	"github.com/joho/godotenv"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
@@ -38,10 +37,21 @@ func Disconnect(client *mongo.Client) {
 func GetAccessKeysToKeyboardsCollection(client *mongo.Client) *mongo.Collection {
 	godotenv.Load()
 	database := os.Getenv("DATABASE")
-	keyboardCollection := os.Getenv("COLLECTION_Keyboard")
+	keyboardCollection := os.Getenv("COLLECTION_Keyboards")
 	if database == "" || keyboardCollection == "" {
-		fmt.Println("failed to get access keys to database")
+		log.Fatal("failed to get access keys to database; Error at `GetAccessKeysToKeyboardsCollection()`")
 	}
 	collection := client.Database(database).Collection(keyboardCollection)
+	return collection
+}
+
+func GetAccessKeysToUsersCollection(client *mongo.Client) *mongo.Collection {
+	godotenv.Load()
+	database := os.Getenv("DATABASE")
+	userCollection := os.Getenv("COLLECTION_users")
+	if database == "" || userCollection == "" {
+		log.Fatal("failed to get access keys to database; Error at `GetAccessKeysToKeyboardsCollection()`")
+	}
+	collection := client.Database(database).Collection(userCollection)
 	return collection
 }
