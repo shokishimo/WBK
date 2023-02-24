@@ -2,6 +2,7 @@ package controller
 
 import (
 	"context"
+	"fmt"
 	"github.com/shokishimo/WhatsTheBestKeyboard/db"
 	"github.com/shokishimo/WhatsTheBestKeyboard/model"
 	"go.mongodb.org/mongo-driver/bson"
@@ -30,7 +31,7 @@ func SignUpHandler(w http.ResponseWriter, r *http.Request) {
 		}
 
 	} else if r.Method == http.MethodPost { // handle POST method
-		errorMessage := signUpPost(w, r)
+		passcode, errorMessage := signUpPost(w, r)
 		if errorMessage != "" {
 			// render error message
 			_, err := w.Write([]byte(errorMessage))
@@ -40,8 +41,8 @@ func SignUpHandler(w http.ResponseWriter, r *http.Request) {
 		}
 		// if sign up ok, now passcode check
 		// Redirect to account home page
-		http.Redirect(w, r, "/verifyPasscode", http.StatusSeeOther)
-
+		uri := "/verifyPasscode?pass=" + passcode
+		http.Redirect(w, r, uri, http.StatusSeeOther)
 	} else { // others
 		w.WriteHeader(http.StatusMethodNotAllowed)
 	}
@@ -49,23 +50,24 @@ func SignUpHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 // signUpPost saves a user signed up
-func signUpPost(w http.ResponseWriter, r *http.Request) string {
+func signUpPost(w http.ResponseWriter, r *http.Request) (string, string) {
 	email := r.FormValue("email")
 	password := r.FormValue("password")
 	result := ValidateSignupInput(email, password)
 	if !result {
 		w.WriteHeader(http.StatusBadRequest)
-		return "http.StatusBadRequest"
+		return "", "http.StatusBadRequest"
 	}
 	// parse username from email
 	separatedEmail := strings.Split(email, "@")
 	username := separatedEmail[len(separatedEmail)-2]
+	passcode := GeneratePasscode()
 
 	theUser := model.User{
 		Username:  username,
 		Email:     email,
 		Password:  Hash(password),
-		SessionID: GeneratePasscode(),
+		SessionID: passcode,
 		Fav:       []model.Keyboard{},
 		BestKeys:  []model.Keyboard{},
 		WorstKeys: []model.Keyboard{},
@@ -81,7 +83,7 @@ func signUpPost(w http.ResponseWriter, r *http.Request) string {
 	doesExists := collection.FindOne(context.TODO(), filter).Err()
 	if doesExists != nil { // There is already a user with the email
 		w.WriteHeader(http.StatusNotAcceptable)
-		return "http.StatusNotAcceptable; already a user with the same email exists"
+		return "", "http.StatusNotAcceptable; already a user with the same email exists"
 	}
 
 	// save the user
@@ -89,13 +91,15 @@ func signUpPost(w http.ResponseWriter, r *http.Request) string {
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
 		log.Fatal(err.Error())
-		return "Failed to save the user"
+		return "", "Failed to save the user"
 	}
-	//// success log
-	//fmt.Println("successfully inserted the user")
-	//
+	// success log
+	fmt.Println("successfully inserted the user")
 
-	// TODO: send email to let them validate the their email address
-
-	return ""
+	// send email to let them validate their email address
+	err = SendPasscodeMail(email)
+	if err != nil {
+		return "", "Failed to send mail to the user"
+	}
+	return passcode, ""
 }
