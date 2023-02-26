@@ -1,17 +1,18 @@
 package controller
 
 import (
+	"fmt"
 	"github.com/shokishimo/WhatsTheBestKeyboard/model"
 	"log"
 	"net/smtp"
 )
 
-func SendPasscodeMail(recipientAddr string) error {
+func SendPasscodeMail(recipientAddr string, passcode string) error {
 	mailS := model.NewMailServer()
 	to := []string{recipientAddr}
 
-	subject := "Testing from GoLang"
-	body := "BestKeyboard website message!\r\nThanks"
+	subject := "Passcode for signing up to What's the Best Keyboard website"
+	body := passcode + " is the sign-up passcode for What's the Best Keyboard website\r\nThanks"
 	message := []byte(
 		"To: " + to[0] + "\r\n" +
 			"Subject: " + subject + "\r\n" + "\r\n" +
@@ -26,5 +27,6 @@ func SendPasscodeMail(recipientAddr string) error {
 		log.Fatal(err.Error())
 		return err
 	}
+	fmt.Println("Success in sending passcode to a new user")
 	return nil
 }

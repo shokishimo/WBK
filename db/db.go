@@ -55,3 +55,14 @@ func GetAccessKeysToUsersCollection(client *mongo.Client) *mongo.Collection {
 	collection := client.Database(database).Collection(userCollection)
 	return collection
 }
+
+func GetAccessKeysToTemporaryUsersCollection(client *mongo.Client) *mongo.Collection {
+	godotenv.Load()
+	database := os.Getenv("DATABASE")
+	temporaryUserCollection := os.Getenv("COLLECTION_temporary_users")
+	if database == "" || temporaryUserCollection == "" {
+		log.Fatal("failed to get access keys to database; Error at `GetAccessKeysToTemporaryUsersCollection()`")
+	}
+	collection := client.Database(database).Collection(temporaryUserCollection)
+	return collection
+}
