@@ -4,10 +4,7 @@ import (
 	"crypto/sha256"
 	"encoding/hex"
 	"fmt"
-	"log"
 	"math/rand"
-	"net/mail"
-	"regexp"
 	"time"
 )
 
@@ -44,17 +41,18 @@ func Hash(val string) string {
 
 // ValidateSignupInput validates user input to signup or login
 func ValidateSignupInput(email string, password string) bool {
-	_, err := mail.ParseAddress(email)
-	if err != nil {
-		return false
-	}
-	regex, err := regexp.Compile(`^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[\\^$.|?*+\-\[\]{}()]).{8,32}$`)
-	if err != nil {
-		log.Fatal(err.Error())
-		return false
-	}
-	if regex.FindString(password) == "" {
-		return false
-	}
+	// TODO: fix validations regex
+	//_, err := mail.ParseAddress(email)
+	//if err != nil {
+	//	return false
+	//}
+	//regex, err := regexp.Compile(`^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[\\^$.|?*+\-\[\]{}()]).{8,32}$`)
+	//if err != nil {
+	//	log.Fatal(err.Error())
+	//	return false
+	//}
+	//if regex.FindString(password) == "" {
+	//	return false
+	//}
 	return true
 }

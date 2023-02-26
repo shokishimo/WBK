@@ -2,7 +2,6 @@ package model
 
 import (
 	"context"
-	"github.com/shokishimo/WhatsTheBestKeyboard/db"
 	"go.mongodb.org/mongo-driver/mongo"
 )
 
@@ -16,14 +15,7 @@ type User struct {
 	WorstKeys []Keyboard `json:"worstkeys"`
 }
 
-func SaveUser(theUser User) error {
-	client := db.Connect()
-	collection := db.GetAccessKeysToUsersCollection(client)
-	defer db.Disconnect(client)
-	return SaveUserToUsersCollection(theUser, collection)
-}
-
-func SaveUserToUsersCollection(theUser User, collection *mongo.Collection) error {
+func SaveUserToTemporaryUsersCollection(theUser User, collection *mongo.Collection) error {
 	// begin insert user
 	_, err := collection.InsertOne(context.TODO(), theUser)
 	if err != nil {

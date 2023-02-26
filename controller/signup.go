@@ -7,7 +7,6 @@ import (
 	"github.com/shokishimo/WhatsTheBestKeyboard/model"
 	"go.mongodb.org/mongo-driver/bson"
 	"html/template"
-	"log"
 	"net/http"
 	"strings"
 )
@@ -78,22 +77,25 @@ func signUpPost(w http.ResponseWriter, r *http.Request) string {
 
 	// check if the input user already exists in the database
 	// Define the filter to find a specific document
+	var res bson.M
 	filter := bson.M{"email": email}
-	doesExists := collection.FindOne(context.TODO(), filter).Err()
-	if doesExists != nil { // There is already a user with the email
+	err := collection.FindOne(context.TODO(), filter).Decode(&res)
+	// when the user with the sessionID found
+	if err == nil {
 		w.WriteHeader(http.StatusNotAcceptable)
+		fmt.Println(err.Error())
 		return "http.StatusNotAcceptable; already a user with the same email exists"
 	}
 
 	// save the user
-	err := model.SaveUserToUsersCollection(theUser, collection)
+	err = model.SaveUserToTemporaryUsersCollection(theUser, collection)
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
-		log.Fatal(err.Error())
+		fmt.Println(err.Error())
 		return "Failed to save the user"
 	}
 	// success log
-	fmt.Println("successfully inserted the user")
+	fmt.Println("successfully inserted the user to temporary users collection")
 
 	// send email to let them validate their email address
 	err = SendPasscodeMail(email, passcode)
