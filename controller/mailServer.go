@@ -10,7 +10,12 @@ func SendPasscodeMail(recipientAddr string) error {
 	mailS := model.NewMailServer()
 	to := []string{recipientAddr}
 
-	message := []byte("BestKeyboard website message.")
+	subject := "Testing from GoLang"
+	body := "BestKeyboard website message!\r\nThanks"
+	message := []byte(
+		"To: " + to[0] + "\r\n" +
+			"Subject: " + subject + "\r\n" + "\r\n" +
+			body + "\r\n")
 
 	// set up the authentication
 	auth := smtp.PlainAuth("", mailS.SmtpFrom, mailS.SmtpPassword, mailS.SmtpHOST)
