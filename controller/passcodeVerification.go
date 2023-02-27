@@ -3,6 +3,7 @@ package controller
 import (
 	"html/template"
 	"net/http"
+	"strconv"
 )
 
 func PasscodeVerificationHandler(w http.ResponseWriter, r *http.Request) {
@@ -41,6 +42,11 @@ func VerifyPassGet(w http.ResponseWriter) {
 
 // VerifyPassPost handles HTTP Post request
 func VerifyPassPost(w http.ResponseWriter, r *http.Request) {
+	var inPasscode string
+	for i := 1; i <= 6; i++ {
+		inPasscode = inPasscode + r.FormValue("in"+strconv.Itoa(i))
+	}
+	w.Write([]byte(inPasscode))
 
 	// Once passcode is verified, create a sessionID and cookie and set them up for the user
 	//// save the cookie in the client browser
