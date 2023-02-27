@@ -23,6 +23,7 @@ func ServePublicHome(w http.ResponseWriter) {
 		return
 	}
 
+	// TODO: when rendering the page, add username
 	keyboards := model.GetRanks(4)
 	w.Header().Set("Content-Type", "text/html")
 	err = tmpl.Execute(w, keyboards)

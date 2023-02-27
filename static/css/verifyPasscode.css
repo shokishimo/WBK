@@ -1,0 +1,30 @@
+.passcode-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.passcode-input {
+    display: flex;
+    justify-content: center;
+    padding-bottom: 300px;
+}
+
+.passcode-input input[type="number"] {
+    width: 40px;
+    height: 40px;
+    font-size: 20px;
+    margin: 0 10px;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    text-align: center;
+    outline: none;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
