@@ -2,6 +2,7 @@ package model
 
 import (
 	"context"
+	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
 )
 
@@ -15,11 +16,25 @@ type User struct {
 	WorstKeys []Keyboard `json:"worstkeys"`
 }
 
-func SaveUserToTemporaryUsersCollection(theUser User, collection *mongo.Collection) error {
-	// begin insert user
+// SaveUser stores the user to the specified collection
+func SaveUser(theUser User, collection *mongo.Collection) error {
 	_, err := collection.InsertOne(context.TODO(), theUser)
 	if err != nil {
 		return err
+	}
+	return nil
+}
+
+// DeleteUser deletes the user from the specified collection
+func DeleteUser(theUser User, collection *mongo.Collection) error {
+	filter := bson.M{"email": theUser.Email}
+
+	result, err := collection.DeleteOne(context.Background(), filter)
+	if err != nil {
+		return err
+	}
+	if result.DeletedCount == 0 {
+		return mongo.ErrNoDocuments
 	}
 	return nil
 }

@@ -20,8 +20,8 @@ func GenerateSessionID() string {
 	return sessionID
 }
 
-// SetCookie sets a cookie
-func SetCookie(w http.ResponseWriter, sid string) {
+// SetSessionCookie sets a session cookie
+func SetSessionCookie(w http.ResponseWriter, sid string) {
 	cookie := http.Cookie{
 		Name:     "sessionid",
 		Value:    sid,
@@ -31,6 +31,44 @@ func SetCookie(w http.ResponseWriter, sid string) {
 		SameSite: http.SameSiteLaxMode, // TODO: change this to Strict (maybe)
 	}
 	http.SetCookie(w, &cookie)
+}
+
+// SetUsernameCookie sets username cookie
+func SetUsernameCookie(w http.ResponseWriter, username string) {
+	usernameCookie := http.Cookie{
+		Name:     "username",
+		Value:    username,
+		Expires:  time.Now().Add(3600 * 24 * 3 * time.Second), // 3 days
+		HttpOnly: true,
+		Secure:   true,
+		SameSite: http.SameSiteLaxMode, // TODO: change this to Strict (maybe)
+	}
+	http.SetCookie(w, &usernameCookie)
+}
+
+// SetEmailCookie sets email cookie
+func SetEmailCookie(w http.ResponseWriter, email string) {
+	cookie := http.Cookie{
+		Name:     "email",
+		Value:    email,
+		Expires:  time.Now().Add(3600 * 24 * 1 * time.Second), // 3 days
+		HttpOnly: true,
+		Secure:   true,
+		SameSite: http.SameSiteLaxMode, // TODO: change this to Strict (maybe)
+	}
+	http.SetCookie(w, &cookie)
+}
+
+// DeleteEmailCookie deletes email cookie from browser
+func DeleteEmailCookie(w http.ResponseWriter, email string) {
+	emailCookie := &http.Cookie{
+		Name:     "email",
+		Value:    email,
+		Expires:  time.Now(),
+		MaxAge:   -1,
+		HttpOnly: true,
+	}
+	http.SetCookie(w, emailCookie)
 }
 
 // GeneratePasscode generates a passcode of length 6

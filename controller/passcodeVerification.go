@@ -9,7 +9,6 @@ import (
 	"html/template"
 	"net/http"
 	"strconv"
-	"time"
 )
 
 func PasscodeVerificationHandler(w http.ResponseWriter, r *http.Request) {
@@ -26,21 +25,8 @@ func PasscodeVerificationHandler(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 		// if status accepted
-		tmpl, err := template.ParseFiles("static/public/home.html")
-		if err != nil {
-			_, err := w.Write([]byte(err.Error()))
-			if err != nil {
-				return
-			}
-			return
-		}
-
-		w.Header().Set("Content-Type", "text/html")
-		err = tmpl.Execute(w, nil)
-		if err != nil {
-			http.Error(w, err.Error(), http.StatusInternalServerError)
-			return
-		}
+		// Redirect to account home page
+		http.Redirect(w, r, "/", http.StatusSeeOther)
 	} else {
 		w.WriteHeader(http.StatusMethodNotAllowed)
 		_, err := w.Write([]byte("http method allowed"))
@@ -84,44 +70,34 @@ func VerifyPassPost(w http.ResponseWriter, r *http.Request) error {
 
 	// check if the input user already exists in the database
 	// Define the filter to find a specific document
-	var res model.User
+	var theUser model.User
 	filter := bson.M{"sessionid": inPasscode}
-	err := collection.FindOne(context.TODO(), filter).Decode(&res)
+	err := collection.FindOne(context.TODO(), filter).Decode(&theUser)
 	// when the user with the passcode not found
 	if err != nil {
 		fmt.Println(err.Error())
 		return err
 	}
-	fmt.Println(res)
+	fmt.Println(theUser)
 
 	// Once passcode is verified, create and set session id
 	sessionId := GenerateSessionID()
-	res.SessionID = Hash(sessionId)
+	theUser.SessionID = Hash(sessionId)
 
 	// save the sessionid and username in the client browser
-	SetCookie(w, Hash(sessionId))
-	usernameCookie := http.Cookie{
-		Name:     "username",
-		Value:    res.Username,
-		Expires:  time.Now().Add(3600 * 24 * 3 * time.Second), // 3 days
-		HttpOnly: true,
-		Secure:   true,
-		SameSite: http.SameSiteLaxMode, // TODO: change this to Strict (maybe)
-	}
-	http.SetCookie(w, &usernameCookie)
-
+	SetSessionCookie(w, Hash(sessionId))
+	SetUsernameCookie(w, theUser.Username)
 	// delete email cookie
-	// delete cookie from browser
-	emailCookie := &http.Cookie{
-		Name:     "email",
-		Value:    res.Email,
-		Expires:  time.Now(),
-		MaxAge:   -1,
-		HttpOnly: true,
-	}
-	http.SetCookie(w, emailCookie)
+	DeleteEmailCookie(w, theUser.Email)
 
-	// save user to the users table and delete this user from the temporary
+	// delete this user from the temporary and save user to the users table
+	err = model.DeleteUser(theUser, collection)
+	collection = db.GetAccessKeysToUsersCollection(client)
+	err = model.SaveUser(theUser, collection)
+	if err != nil {
+		fmt.Println(err.Error())
+		return err
+	}
 
 	return nil
 }

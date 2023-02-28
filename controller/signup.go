@@ -9,7 +9,6 @@ import (
 	"html/template"
 	"net/http"
 	"strings"
-	"time"
 )
 
 func SignUpHandler(w http.ResponseWriter, r *http.Request) {
@@ -89,7 +88,7 @@ func signUpPost(w http.ResponseWriter, r *http.Request) string {
 	}
 
 	// save the user
-	err = model.SaveUserToTemporaryUsersCollection(theUser, collection)
+	err = model.SaveUser(theUser, collection)
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
 		fmt.Println(err.Error())
@@ -105,14 +104,6 @@ func signUpPost(w http.ResponseWriter, r *http.Request) string {
 	}
 
 	// set email to the browser so that a user can let the system to resend their passcode in case there is a issue
-	cookie := http.Cookie{
-		Name:     "email",
-		Value:    email,
-		Expires:  time.Now().Add(3600 * 24 * 1 * time.Second), // 3 days
-		HttpOnly: true,
-		Secure:   true,
-		SameSite: http.SameSiteLaxMode, // TODO: change this to Strict (maybe)
-	}
-	http.SetCookie(w, &cookie)
+	SetEmailCookie(w, email)
 	return ""
 }
