@@ -5,6 +5,7 @@ import (
 	"encoding/hex"
 	"fmt"
 	"math/rand"
+	"net/http"
 	"time"
 )
 
@@ -17,6 +18,19 @@ func GenerateSessionID() string {
 	}
 	sessionID := hex.EncodeToString(b)
 	return sessionID
+}
+
+// SetCookie sets a cookie
+func SetCookie(w http.ResponseWriter, sid string) {
+	cookie := http.Cookie{
+		Name:     "sessionid",
+		Value:    sid,
+		Expires:  time.Now().Add(3600 * 24 * 3 * time.Second), // 3 days
+		HttpOnly: true,
+		Secure:   true,
+		SameSite: http.SameSiteLaxMode, // TODO: change this to Strict (maybe)
+	}
+	http.SetCookie(w, &cookie)
 }
 
 // GeneratePasscode generates a passcode of length 6

@@ -9,6 +9,7 @@ import (
 	"html/template"
 	"net/http"
 	"strings"
+	"time"
 )
 
 func SignUpHandler(w http.ResponseWriter, r *http.Request) {
@@ -102,5 +103,16 @@ func signUpPost(w http.ResponseWriter, r *http.Request) string {
 	if err != nil {
 		return "Failed to send mail to the user"
 	}
+
+	// set email to the browser so that a user can let the system to resend their passcode in case there is a issue
+	cookie := http.Cookie{
+		Name:     "email",
+		Value:    email,
+		Expires:  time.Now().Add(3600 * 24 * 1 * time.Second), // 3 days
+		HttpOnly: true,
+		Secure:   true,
+		SameSite: http.SameSiteLaxMode, // TODO: change this to Strict (maybe)
+	}
+	http.SetCookie(w, &cookie)
 	return ""
 }
