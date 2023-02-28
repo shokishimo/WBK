@@ -72,22 +72,22 @@ func signUpPost(w http.ResponseWriter, r *http.Request) string {
 	}
 
 	client := db.Connect()
-	collection := db.GetAccessKeysToTemporaryUsersCollection(client)
+	collection := db.GetAccessKeysToUsersCollection(client)
 	defer db.Disconnect(client)
 
 	// check if the input user already exists in the database
 	// Define the filter to find a specific document
-	var res bson.M
+	var res model.User
 	filter := bson.M{"email": email}
 	err := collection.FindOne(context.TODO(), filter).Decode(&res)
 	// when the user with the sessionID found
 	if err == nil {
 		w.WriteHeader(http.StatusNotAcceptable)
-		fmt.Println(err.Error())
 		return "http.StatusNotAcceptable; already a user with the same email exists"
 	}
 
-	// save the user
+	// save the user temporary
+	collection = db.GetAccessKeysToTemporaryUsersCollection(client)
 	err = model.SaveUser(theUser, collection)
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
