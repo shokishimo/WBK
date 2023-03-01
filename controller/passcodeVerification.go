@@ -78,7 +78,6 @@ func VerifyPassPost(w http.ResponseWriter, r *http.Request) error {
 		fmt.Println(err.Error())
 		return err
 	}
-	fmt.Println(theUser)
 
 	// Once passcode is verified, create and set session id
 	sessionId := GenerateSessionID()
@@ -86,6 +85,7 @@ func VerifyPassPost(w http.ResponseWriter, r *http.Request) error {
 
 	// save the sessionid and username in the client browser
 	SetSessionCookie(w, Hash(sessionId))
+	// SetUsernameCookie(w, theUser.Username)
 	SetUsernameCookie(w, theUser.Username)
 	// delete email cookie
 	DeleteEmailCookie(w, theUser.Email)

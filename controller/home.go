@@ -12,21 +12,21 @@ func HomeHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	ServePublicHome(w)
+	ServePublicHome(w, r)
 }
 
 // ServePublicHome shows the public template home to the browser
-func ServePublicHome(w http.ResponseWriter) {
+func ServePublicHome(w http.ResponseWriter, r *http.Request) {
 	tmpl, err := template.ParseFiles("static/public/home.html")
 	if err != nil {
 		w.Write([]byte(err.Error()))
 		return
 	}
 
-	// TODO: when rendering the page, add username
-	keyboards := model.GetRanks(4)
+	// get keyboards ranking
+	Keyboards := model.GetRanks(4)
 	w.Header().Set("Content-Type", "text/html")
-	err = tmpl.Execute(w, keyboards)
+	err = tmpl.Execute(w, Keyboards)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return

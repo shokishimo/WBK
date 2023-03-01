@@ -33,17 +33,36 @@ func SetSessionCookie(w http.ResponseWriter, sid string) {
 	http.SetCookie(w, &cookie)
 }
 
+// GetSessionCookie obtains sessionID inside the cookie
+func GetSessionCookie(r *http.Request) string {
+	cookie, err := r.Cookie("sessionid")
+	if err != nil {
+		// when there is no cookie set to the browser
+		return ""
+	}
+	return cookie.Value
+}
+
 // SetUsernameCookie sets username cookie
 func SetUsernameCookie(w http.ResponseWriter, username string) {
 	usernameCookie := http.Cookie{
 		Name:     "username",
 		Value:    username,
 		Expires:  time.Now().Add(3600 * 24 * 3 * time.Second), // 3 days
-		HttpOnly: true,
+		HttpOnly: false,                                       // so that the browser's javascript extract data from the username cookie
 		Secure:   true,
 		SameSite: http.SameSiteLaxMode, // TODO: change this to Strict (maybe)
 	}
 	http.SetCookie(w, &usernameCookie)
+}
+
+func GetUsernameCookie(r *http.Request) string {
+	cookie, err := r.Cookie("username")
+	if err != nil {
+		// when there is no cookie set to the browser
+		return ""
+	}
+	return cookie.Value
 }
 
 // SetEmailCookie sets email cookie

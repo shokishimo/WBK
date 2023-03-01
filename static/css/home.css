@@ -143,6 +143,15 @@ form {
     z-index: 100;
 }
 
+.logined-username {
+    position: relative;
+    display: flex;
+    align-items: center;
+    height: 100%;
+    margin-right: 30px;
+    font-size: 14px;
+}
+
     /*fav*/
 .main-header-favorite {
     position: relative;
