@@ -6,9 +6,8 @@ function submitHomeForm() {
     document.getElementById("home").submit();
 }
 
-const loginDiv = document.getElementById('login-switch');
-
 window.onload = function() {
+    const loginDiv = document.getElementById('login-switch');
     const username = getUsernameCookie();
     if (username === "") { // show Login
         loginDiv.innerHTML = "<form class=\"main-header-controller-login\" id=\"loginedUsername\" action=\"/login\" method=\"get\" onclick=\"submitLoginForm()\">\n" +
