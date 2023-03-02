@@ -84,11 +84,10 @@ func VerifyPassPost(w http.ResponseWriter, r *http.Request) error {
 	theUser.SessionID = Hash(sessionId)
 
 	// save the sessionid and username in the client browser
-	SetSessionCookie(w, Hash(sessionId))
-	// SetUsernameCookie(w, theUser.Username)
+	SetSessionCookie(w, sessionId)
 	SetUsernameCookie(w, theUser.Username)
 	// delete email cookie
-	DeleteEmailCookie(w, theUser.Email)
+	DeleteCookie(w, "email", theUser.Email)
 
 	// delete this user from the temporary and save user to the users table
 	err = model.DeleteUser(theUser, collection)

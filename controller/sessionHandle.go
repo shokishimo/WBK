@@ -78,16 +78,16 @@ func SetEmailCookie(w http.ResponseWriter, email string) {
 	http.SetCookie(w, &cookie)
 }
 
-// DeleteEmailCookie deletes email cookie from browser
-func DeleteEmailCookie(w http.ResponseWriter, email string) {
-	emailCookie := &http.Cookie{
-		Name:     "email",
-		Value:    email,
+// DeleteCookie deletes the named cookie from browser
+func DeleteCookie(w http.ResponseWriter, key string, value string) {
+	cookie := &http.Cookie{
+		Name:     key,
+		Value:    value,
 		Expires:  time.Now(),
 		MaxAge:   -1,
 		HttpOnly: true,
 	}
-	http.SetCookie(w, emailCookie)
+	http.SetCookie(w, cookie)
 }
 
 // GeneratePasscode generates a passcode of length 6
