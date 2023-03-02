@@ -186,14 +186,14 @@ form {
     color: black;
 }
 
-.dropdown-content {
+#dropdown-content {
     display: none;
     position: absolute;
     width: 50px;
     z-index: 1;
 }
 
-.dropdown-content a {
+#dropdown-content a {
     color: black;
     width: 50px;
     display: block;
@@ -202,9 +202,9 @@ form {
     text-decoration: none;
 }
 
-.main-header-controller-user-account:hover .dropdown-content {display: block;}
+.main-header-controller-user-account:hover #dropdown-content {display: block;}
 .account:hover {color: springgreen;}
-.dropdown-content a:hover {color: springgreen;}
+#dropdown-content a:hover {color: springgreen;}
 
 
 /*------------ Main ------------*/

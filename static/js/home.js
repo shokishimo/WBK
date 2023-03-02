@@ -7,7 +7,9 @@ function submitHomeForm() {
 }
 
 window.onload = function() {
+    // login/username and rendering
     const loginDiv = document.getElementById('login-switch');
+    const dropDown = document.getElementById('dropdown-content');
     const username = getUsernameCookie();
     if (username === "") { // show Login
         loginDiv.innerHTML = "<form class=\"main-header-controller-login\" id=\"loginedUsername\" action=\"/login\" method=\"get\" onclick=\"submitLoginForm()\">\n" +
@@ -15,6 +17,7 @@ window.onload = function() {
                              "</form>";
     } else { // show username instead of login
         loginDiv.innerHTML = "<p class=\"logined-username\">" + username + "</p>"
+        dropDown.innerHTML = "<a class=\"logout\" href=\"/logout\">Log out</a>"
     }
 }
 
