@@ -221,6 +221,7 @@ form {
     display: flex;
     justify-content: center;
     padding-bottom: 30px;
+    flex-wrap: wrap;
 }
 
 .ranking {
