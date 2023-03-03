@@ -2,7 +2,6 @@ package controller
 
 import (
 	"context"
-	"fmt"
 	"github.com/shokishimo/WhatsTheBestKeyboard/db"
 	"github.com/shokishimo/WhatsTheBestKeyboard/model"
 	"go.mongodb.org/mongo-driver/bson"
@@ -15,10 +14,7 @@ func SignUpHandler(w http.ResponseWriter, r *http.Request) {
 	if r.Method == http.MethodGet { // handle GET method
 		tmpl, err := template.ParseFiles("static/public/signup.html")
 		if err != nil {
-			_, err := w.Write([]byte(err.Error()))
-			if err != nil {
-				return
-			}
+			_, _ = w.Write([]byte(err.Error()))
 			return
 		}
 
@@ -33,10 +29,7 @@ func SignUpHandler(w http.ResponseWriter, r *http.Request) {
 		errorMessage := signUpPost(w, r)
 		if errorMessage != "" {
 			// render error message
-			_, err := w.Write([]byte(errorMessage))
-			if err != nil {
-				return
-			}
+			_, _ = w.Write([]byte(errorMessage))
 		}
 		// if sign up ok, now passcode check
 		// Redirect to account home page
@@ -91,7 +84,6 @@ func signUpPost(w http.ResponseWriter, r *http.Request) string {
 	err = model.SaveUser(theUser, collection)
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
-		fmt.Println(err.Error())
 		return "Failed to save the user"
 	}
 
