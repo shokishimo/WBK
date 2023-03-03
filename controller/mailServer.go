@@ -1,7 +1,6 @@
 package controller
 
 import (
-	"fmt"
 	"github.com/shokishimo/WhatsTheBestKeyboard/model"
 	"log"
 	"net/smtp"
@@ -27,6 +26,6 @@ func SendPasscodeMail(recipientAddr string, passcode string) error {
 		log.Fatal(err.Error())
 		return err
 	}
-	fmt.Println("Success in sending passcode to a new user")
+	// fmt.Println("Success in sending passcode to a new user")
 	return nil
 }

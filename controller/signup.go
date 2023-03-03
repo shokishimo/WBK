@@ -94,8 +94,6 @@ func signUpPost(w http.ResponseWriter, r *http.Request) string {
 		fmt.Println(err.Error())
 		return "Failed to save the user"
 	}
-	// success log
-	fmt.Println("successfully inserted the user to temporary users collection")
 
 	// send email to let them validate their email address
 	err = SendPasscodeMail(email, passcode)

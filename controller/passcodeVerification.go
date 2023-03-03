@@ -2,7 +2,6 @@ package controller
 
 import (
 	"context"
-	"fmt"
 	"github.com/shokishimo/WhatsTheBestKeyboard/db"
 	"github.com/shokishimo/WhatsTheBestKeyboard/model"
 	"go.mongodb.org/mongo-driver/bson"
@@ -18,10 +17,7 @@ func PasscodeVerificationHandler(w http.ResponseWriter, r *http.Request) {
 		err := VerifyPassPost(w, r)
 		if err != nil {
 			w.WriteHeader(http.StatusNotAcceptable)
-			_, err2 := w.Write([]byte(err.Error()))
-			if err2 != nil {
-				return
-			}
+			_, _ = w.Write([]byte(err.Error()))
 			return
 		}
 		// if status accepted
@@ -29,10 +25,7 @@ func PasscodeVerificationHandler(w http.ResponseWriter, r *http.Request) {
 		http.Redirect(w, r, "/", http.StatusSeeOther)
 	} else {
 		w.WriteHeader(http.StatusMethodNotAllowed)
-		_, err := w.Write([]byte("http method allowed"))
-		if err != nil {
-			return
-		}
+		_, _ = w.Write([]byte("http method allowed"))
 		return
 	}
 }
@@ -41,10 +34,7 @@ func PasscodeVerificationHandler(w http.ResponseWriter, r *http.Request) {
 func VerifyPassGet(w http.ResponseWriter) {
 	tmpl, err := template.ParseFiles("static/public/verifyPasscode.html")
 	if err != nil {
-		_, err := w.Write([]byte(err.Error()))
-		if err != nil {
-			return
-		}
+		_, _ = w.Write([]byte(err.Error()))
 		return
 	}
 
@@ -75,7 +65,6 @@ func VerifyPassPost(w http.ResponseWriter, r *http.Request) error {
 	err := collection.FindOne(context.TODO(), filter).Decode(&theUser)
 	// when the user with the passcode not found
 	if err != nil {
-		fmt.Println(err.Error())
 		return err
 	}
 
@@ -94,7 +83,6 @@ func VerifyPassPost(w http.ResponseWriter, r *http.Request) error {
 	collection = db.GetAccessKeysToUsersCollection(client)
 	err = model.SaveUser(theUser, collection)
 	if err != nil {
-		fmt.Println(err.Error())
 		return err
 	}
 
