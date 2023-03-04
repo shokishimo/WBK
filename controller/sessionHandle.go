@@ -6,6 +6,8 @@ import (
 	"fmt"
 	"math/rand"
 	"net/http"
+	"net/mail"
+	"strings"
 	"time"
 )
 
@@ -111,19 +113,18 @@ func Hash(val string) string {
 }
 
 // ValidateSignupInput validates user input to signup or login
-func ValidateSignupInput(email string, password string) bool {
+func ValidateSignupInput(email string, password string) string {
 	// TODO: fix validations regex
-	//_, err := mail.ParseAddress(email)
-	//if err != nil {
-	//	return false
-	//}
-	//regex, err := regexp.Compile(`^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[\\^$.|?*+\-\[\]{}()]).{8,32}$`)
-	//if err != nil {
-	//	log.Fatal(err.Error())
-	//	return false
-	//}
-	//if regex.FindString(password) == "" {
-	//	return false
-	//}
-	return true
+	email = strings.ToLower(email)
+	password = strings.ToLower(password)
+
+	_, err := mail.ParseAddress(email)
+	if err != nil {
+		return "email is invalid"
+	}
+
+	_ = "`^(?=.*[!@#$%^&*()_+-={};':,.<>/?])(?=.*[a-z])(?=.*[A-Z]).+$`"
+
+	// valid
+	return ""
 }

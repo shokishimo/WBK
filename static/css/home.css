@@ -215,6 +215,10 @@ form {
     padding: 10px;
 }
 
+.headline p {
+    font-size: 20px;
+}
+
 /*Ranking part*/
 .ranking-container {
     position: relative;

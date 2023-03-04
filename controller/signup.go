@@ -45,9 +45,9 @@ func signUpPost(w http.ResponseWriter, r *http.Request) string {
 	email := r.FormValue("email")
 	password := r.FormValue("password")
 	result := ValidateSignupInput(email, password)
-	if !result {
+	if result != "" {
 		w.WriteHeader(http.StatusBadRequest)
-		return "http.StatusBadRequest"
+		return result
 	}
 	// parse username from email
 	separatedEmail := strings.Split(email, "@")
