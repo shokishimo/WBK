@@ -24,6 +24,15 @@ p {
     padding-bottom: 20px;
 }
 
+.login-error {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    background-color: #e94709;
+    font-size: 20px;
+    margin-bottom: 10px;
+    color: blanchedalmond;
+}
+
 .email-class {
     padding-right: 220px;
     margin-bottom: 5px;
@@ -61,4 +70,5 @@ p {
     margin-top: 10px;
     margin-bottom: 10px;
     font-weight: bold;
+    cursor: pointer;
 }

@@ -24,18 +24,22 @@
     <main>
         <div class="container">
             <p class="Login">Login</p>
-            <div class="login-error"></div>
+            <div class="login-error">{{.ErrorString}}</div>
             <div class="login-container">
                 <form class="login-form" method="post" action="/login">
                     <div class="login-content">
                         <div class="email-and-password">
                             <div>
                                 <p id="email-id" class="email-class">Email</p>
-                                <input type="text" id="email-input" class="input" placeholder="email">
+                                <label for="email-input">
+                                    <input type="text" name="email" id="email-input" class="input" placeholder="email">
+                                </label>
                             </div>
                             <div>
                                 <p id="password-id" class="password-class">Password</p>
-                                <input type="password" id="password-input" class="input" placeholder="password">
+                                <label for="password-input">
+                                    <input type="password" name="password" id="password-input" class="input" placeholder="password">
+                                </label>
                             </div>
                         </div>
                         <p class="forget-p"><a class="forget-a" href="/forget">Forgot your password?</a></p>
