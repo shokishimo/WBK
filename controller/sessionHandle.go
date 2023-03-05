@@ -114,16 +114,13 @@ func Hash(val string) string {
 
 // ValidateSignupInput validates user input to signup or login
 func ValidateSignupInput(email string, password string) string {
-	// TODO: fix validations regex
-	email = strings.ToLower(email)
-	password = strings.ToLower(password)
-
 	_, err := mail.ParseAddress(email)
 	if err != nil {
 		return "email is invalid"
 	}
+	// TODO: fix validations regex
 
-	_ = "`^(?=.*[!@#$%^&*()_+-={};':,.<>/?])(?=.*[a-z])(?=.*[A-Z]).+$`"
+	password = strings.ToLower(password)
 
 	// valid
 	return ""
