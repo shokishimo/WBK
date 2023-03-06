@@ -1,6 +1,11 @@
 package controller
 
 import (
+	"context"
+	"github.com/shokishimo/WhatsTheBestKeyboard/db"
+	"github.com/shokishimo/WhatsTheBestKeyboard/model"
+	"go.mongodb.org/mongo-driver/bson"
+	"go.mongodb.org/mongo-driver/mongo/options"
 	"html/template"
 	"net/http"
 )
@@ -32,7 +37,8 @@ func LoginHandler(w http.ResponseWriter, r *http.Request) {
 		if res != "" {
 			renderLoginPage(w, LoginData{ErrorString: res})
 		}
-
+		// Redirect to account home page
+		http.Redirect(w, r, "/", http.StatusSeeOther)
 	}
 }
 
@@ -46,6 +52,26 @@ func handleLogin(w http.ResponseWriter, r *http.Request) string {
 	}
 
 	// check in database
+	client := db.Connect()
+	defer db.Disconnect(client)
+	collection := db.GetAccessKeysToUsersCollection(client)
+
+	// create a new sessionID
+	sessionID := GenerateSessionID()
+
+	var res model.User
+	// Define opt to return the updated document
+	opt := options.FindOneAndUpdate().SetReturnDocument(options.After)
+	filter := bson.M{"email": email, "password": Hash(password)}
+	update := bson.M{"$set": bson.M{"sessionid": Hash(sessionID)}}
+	err := collection.FindOneAndUpdate(context.TODO(), filter, update, opt).Decode(&res)
+	if err != nil {
+		return "Error happened during some executions to database: " + err.Error()
+	}
+
+	// when found
+	SetUsernameCookie(w, res.Username)
+	SetSessionCookie(w, sessionID)
 
 	return ""
 }

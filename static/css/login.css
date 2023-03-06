@@ -27,10 +27,9 @@ p {
 .login-error {
     padding-top: 10px;
     padding-bottom: 10px;
-    background-color: #e94709;
     font-size: 20px;
     margin-bottom: 10px;
-    color: blanchedalmond;
+    color: #e94709;
 }
 
 .email-class {
