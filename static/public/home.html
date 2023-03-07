@@ -20,12 +20,11 @@
 
                 <!--Header Middle-->
                 <div class="main-header-search">
-                    <img class="main-header-search-icon" src="/static/images/searchLogo.png" aria-label="search" aria-hidden="false">
-                    <form class="main-header-search-form" action="/search" method="get" role="search" data-container="search-form">
+                    <img class="main-header-search-icon" src="/static/images/searchLogo.png" aria-label="search" aria-hidden="false" alt="search-icon" onclick="searchKeyboard()">
+                    <form id="main-header-search-form" action="/search" method="get" role="search" data-container="search-form">
                         <div class="main-header-search-div" data-container="search-div" data-input="true">
                             <label class="main-header-search-label">
-                                <input class="main-header-search-input" type="search" name="p_keyv" value id="searchText" autocomplete="off" data-trigger="searchFromAllItems">
-                                <button type="button" class="main-header-search-button" hidden="until-found" aria-label="deleteText" aria-hidden="false" data-trigger="delete"></button>
+                                <input class="main-header-search-input" type="search" name="searchKey" value id="searchText" autocomplete="off" data-trigger="searchFromAllItems">
                             </label>
                         </div>
                     </form>

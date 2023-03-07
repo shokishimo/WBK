@@ -6,6 +6,10 @@ function submitHomeForm() {
     document.getElementById("home").submit();
 }
 
+function searchKeyboard() {
+    document.getElementById("main-header-search-form").submit();
+}
+
 window.onload = function() {
     // login/username and rendering
     const loginDiv = document.getElementById('login-switch');
