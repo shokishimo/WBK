@@ -16,6 +16,8 @@ func ServeMux() http.Handler {
 	mux.HandleFunc("/forget", controller.ForgetHandler)
 	mux.HandleFunc("/createNewKeyboard", controller.CreateNewKeyboardHandler)
 	mux.HandleFunc("/getRanking", controller.GetRankingHandler)
+	mux.HandleFunc("/account", controller.AccountHandler)
+	mux.HandleFunc("/notFound", controller.Handle404)
 
 	mux.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("./static"))))
 	return mux
