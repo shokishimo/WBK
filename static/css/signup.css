@@ -134,7 +134,7 @@ footer {
     text-align: center;
 }
 
-/* Use a media query to add a breakpoint at 800px: */
+/* Use a media query to add a breakpoint at 500px: */
 @media screen and (max-width: 500px) {
     .signup-box {
         width: 300px;
