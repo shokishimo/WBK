@@ -12,6 +12,11 @@ form {
 }
 
 /*------------ Header ------------*/
+#favicon {
+    width: 30px;
+    height: 30px;
+}
+
 .main-header {
     position: relative;
     top: 0;
