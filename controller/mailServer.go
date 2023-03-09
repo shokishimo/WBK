@@ -2,7 +2,6 @@ package controller
 
 import (
 	"github.com/shokishimo/WhatsTheBestKeyboard/model"
-	"log"
 	"net/smtp"
 )
 
@@ -23,7 +22,6 @@ func SendPasscodeMail(recipientAddr string, passcode string) error {
 	// send the email
 	err := smtp.SendMail(mailS.SmtpHOST+":"+mailS.SmtpPort, auth, mailS.SmtpFrom, to, message)
 	if err != nil {
-		log.Fatal(err.Error())
 		return err
 	}
 	// fmt.Println("Success in sending passcode to a new user")

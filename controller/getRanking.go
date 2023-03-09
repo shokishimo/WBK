@@ -2,9 +2,7 @@ package controller
 
 import (
 	"encoding/json"
-	"fmt"
 	"github.com/shokishimo/WhatsTheBestKeyboard/model"
-	"log"
 	"net/http"
 	"strconv"
 )
@@ -19,7 +17,8 @@ func GetRankingHandler(w http.ResponseWriter, r *http.Request) {
 	queryParams := r.URL.Query()
 	numberOfData, err := strconv.Atoi(queryParams.Get("number"))
 	if err != nil {
-		fmt.Println(err.Error() + "at GetRankingHandler function")
+		w.WriteHeader(http.StatusInternalServerError)
+		_, _ = w.Write([]byte(err.Error()))
 		return
 	}
 	// TODO: Add query validation here
@@ -29,6 +28,7 @@ func GetRankingHandler(w http.ResponseWriter, r *http.Request) {
 	keyboards = model.GetRanks(numberOfData)
 	if keyboards == nil {
 		w.WriteHeader(http.StatusInternalServerError)
+		_, _ = w.Write([]byte("No keyboard found"))
 		return
 	}
 
@@ -36,6 +36,8 @@ func GetRankingHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	err = json.NewEncoder(w).Encode(keyboards)
 	if err != nil {
-		log.Fatalf("Error encoding response: %v", err)
+		w.WriteHeader(http.StatusInternalServerError)
+		_, _ = w.Write([]byte("Error encoding response: " + err.Error()))
+		return
 	}
 }

@@ -27,18 +27,14 @@ func LogoutHandler(w http.ResponseWriter, r *http.Request) {
 	// when an error happened in the transaction
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
-		_, err := w.Write([]byte("Error happened during the transaction"))
-		if err != nil {
-			return
-		}
+		_, _ = w.Write([]byte("Error happened during the transaction"))
+		return
 	}
 	// when the user with the username and password not found
 	if result.MatchedCount == 0 {
 		w.WriteHeader(http.StatusInternalServerError)
-		_, err := w.Write([]byte("Error: user not found"))
-		if err != nil {
-			return
-		}
+		_, _ = w.Write([]byte("Error: user not found"))
+		return
 	}
 
 	http.Redirect(w, r, "/", http.StatusSeeOther)

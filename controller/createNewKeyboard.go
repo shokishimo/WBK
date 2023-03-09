@@ -3,7 +3,6 @@ package controller
 import (
 	"context"
 	"encoding/json"
-	"fmt"
 	"github.com/shokishimo/WhatsTheBestKeyboard/db"
 	"github.com/shokishimo/WhatsTheBestKeyboard/model"
 	"net/http"
@@ -19,7 +18,8 @@ func CreateNewKeyboardHandler(w http.ResponseWriter, r *http.Request) {
 	var keyboard model.Keyboard
 	err = decoder.Decode(&keyboard)
 	if err != nil {
-		http.Error(w, "Error parsing JSON data", http.StatusBadRequest)
+		w.WriteHeader(http.StatusBadRequest)
+		_, _ = w.Write([]byte("Error parsing JSON data: " + err.Error()))
 		return
 	}
 
@@ -32,6 +32,8 @@ func CreateNewKeyboardHandler(w http.ResponseWriter, r *http.Request) {
 	_, err = collection.InsertOne(context.TODO(), keyboard)
 
 	if err != nil {
-		fmt.Println(err.Error())
+		w.WriteHeader(http.StatusInternalServerError)
+		_, _ = w.Write([]byte(err.Error()))
+		return
 	}
 }

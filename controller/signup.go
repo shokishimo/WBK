@@ -29,7 +29,9 @@ func SignUpHandler(w http.ResponseWriter, r *http.Request) {
 		errorMessage := signUpPost(w, r)
 		if errorMessage != "" {
 			// render error message
+			w.WriteHeader(http.StatusInternalServerError)
 			_, _ = w.Write([]byte(errorMessage))
+			return
 		}
 		// if sign up ok, now passcode check
 		// Redirect to account home page
@@ -90,7 +92,7 @@ func signUpPost(w http.ResponseWriter, r *http.Request) string {
 	// send email to let them validate their email address
 	err = SendPasscodeMail(email, passcode)
 	if err != nil {
-		return "Failed to send mail to the user"
+		return "Failed to send mail to the user: " + err.Error()
 	}
 
 	// set email to the browser so that a user can let the system to resend their passcode in case there is a issue
