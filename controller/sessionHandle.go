@@ -125,3 +125,11 @@ func ValidateSignupInput(email string, password string) string {
 	// valid
 	return ""
 }
+
+func ValidateEmail(email string) string {
+	_, err := mail.ParseAddress(email)
+	if err != nil {
+		return "email is invalid"
+	}
+	return ""
+}
