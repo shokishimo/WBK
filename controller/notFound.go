@@ -8,7 +8,7 @@ import (
 func Handle404(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusNotFound)
 	tmpl, err := template.ParseFiles("static/public/notFound.html")
-	err = tmpl.Execute(w, nil)
+	err = tmpl.Execute(w, r.URL.Query().Get("path"))
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
