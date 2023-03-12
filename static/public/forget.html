@@ -1,20 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="utf-8">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>WBK: Sign up</title>
+    <title>WBK: Forgot password</title>
 </head>
-
 <body>
 <div id="body-container">
-
     <!--header-->
     <header class="main-header">
         <div class="main-header-container">
             <!--Header Left-->
-            <img id="favicon" src="/static/images/favicon.png" alt="website icon">
+            <img id="favicon" src="/static/images/favicon.png" alt="website icon" onclick="submitHomeForm()">
             <form class="main-header-logo" id="home" action="/" method="get" onclick="submitHomeForm()">
                 <div class="main-header-logo-trigger"></div>
             </form>
@@ -23,25 +20,17 @@
 
     <!--main-->
     <main>
-        <div class="signup-box">
-            <h2>Signup</h2>
-            <form action="/signup" method="post">
+        <h1 style="text-align: center">Forgot your password?</h1>
+        <div class="forgot-box">
+            <h2>Fill in your email</h2>
+            <form action="/forgot" method="post">
                 <div class="user-box">
                     <label name="email">Email</label>
                     <input type="text" name="email" required="required">
                 </div>
-                <div class="user-box">
-                    <label name="password">Password</label>
-                    <input type="password" name="password" required="required">
-                </div>
 
                 <div class="button-form">
                     <input type="submit" class="submit-button" value="Submit">
-                </div>
-
-                <div id="login">
-                    Already have an account?
-                    <a href="/login">login</a>
                 </div>
             </form>
 
@@ -54,11 +43,12 @@
     </footer>
 </div>
 
-<link rel="stylesheet" href="/static/css/signup.css">
+<link rel="stylesheet" href="/static/css/forget.css">
 <script>
     function submitHomeForm() {
         document.getElementById("home").submit();
     }
 </script>
+
 </body>
 </html>
