@@ -2,24 +2,12 @@ package controller
 
 import (
 	"fmt"
-	"html/template"
 	"net/http"
 )
 
 func ForgetHandler(w http.ResponseWriter, r *http.Request) {
 	if r.Method == http.MethodGet {
-		tmpl, err := template.ParseFiles("static/public/forget.html")
-		if err != nil {
-			_, _ = w.Write([]byte(err.Error()))
-			return
-		}
-
-		w.Header().Set("Content-Type", "text/html")
-		err = tmpl.Execute(w, nil)
-		if err != nil {
-			http.Error(w, err.Error(), http.StatusInternalServerError)
-			return
-		}
+		RenderPage(w, "static/public/forget.html")
 	} else if r.Method == http.MethodPost {
 		err := handleForgetPost(w, r)
 		if err != "" {

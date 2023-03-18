@@ -5,26 +5,13 @@ import (
 	"github.com/shokishimo/WhatsTheBestKeyboard/db"
 	"github.com/shokishimo/WhatsTheBestKeyboard/model"
 	"go.mongodb.org/mongo-driver/bson"
-	"html/template"
 	"net/http"
 	"strings"
 )
 
 func SignUpHandler(w http.ResponseWriter, r *http.Request) {
 	if r.Method == http.MethodGet { // handle GET method
-		tmpl, err := template.ParseFiles("static/public/signup.html")
-		if err != nil {
-			_, _ = w.Write([]byte(err.Error()))
-			return
-		}
-
-		w.Header().Set("Content-Type", "text/html")
-		err = tmpl.Execute(w, nil)
-		if err != nil {
-			http.Error(w, err.Error(), http.StatusInternalServerError)
-			return
-		}
-
+		RenderPage(w, "static/public/signup.html")
 	} else if r.Method == http.MethodPost { // handle POST method
 		errorMessage := signUpPost(w, r)
 		if errorMessage != "" {
