@@ -36,3 +36,11 @@ function getUsernameCookie(){
     }
     return ""
 }
+
+function newKeyboardRequest() {
+    const form = document.createElement('form');
+    form.action = '/newKeyboardRequest';
+    form.method = 'GET';
+    document.body.appendChild(form);
+    form.submit();
+}
