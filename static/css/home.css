@@ -17,6 +17,7 @@ form {
     height: 50px;
     margin-right: -110px;
     cursor: pointer;
+    z-index: 6;
 }
 
 .main-header {
@@ -57,7 +58,7 @@ form {
     background-position: center;
     background-size: contain;
     border: none;
-    z-index: 999;
+    z-index: 5;
 }
 
 /* Header Middle */
@@ -82,7 +83,7 @@ form {
     color: #2d2d2d;
     width: 20px;
     height: 20px;
-    z-index: 100;
+    z-index: 5;
     cursor: pointer;
 }
 
@@ -130,7 +131,7 @@ form {
     background-position: center;
     background-size: contain;
     border: none;
-    z-index: 100;
+    z-index: 5;
 }
 
 .logined-username {
@@ -157,7 +158,7 @@ form {
     background-position: center;
     background-size: contain;
     border: none;
-    z-index: 100;
+    z-index: 5;
 }
 
     /*account*/
@@ -180,7 +181,7 @@ form {
     display: none;
     position: absolute;
     width: 50px;
-    z-index: 1;
+    z-index: 5;
 }
 
 #dropdown-content a {
@@ -230,7 +231,7 @@ form {
     background-position: center;
     background-size: contain;
     border: none;
-    z-index: 1;
+    z-index: 5;
     cursor: pointer;
 }
 
@@ -241,7 +242,7 @@ form {
     background-position: center;
     background-size: contain;
     border: none;
-    z-index: 1;
+    z-index: 5;
     position: absolute;
     top: 0;
     left: 0;
@@ -283,7 +284,7 @@ form {
     border-radius: 20px;
     box-shadow: 0 0 10px #3e3e3e;
     cursor: pointer;
-    z-index: 3;
+    z-index: 5;
 }
 
 .btn-container:hover {

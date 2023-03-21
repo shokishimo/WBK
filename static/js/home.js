@@ -13,15 +13,23 @@ function searchKeyboard() {
 window.onload = function() {
     // login/username and rendering
     const loginDiv = document.getElementById('login-switch');
-    const dropDown = document.getElementById('dropdown-content');
+    const favLink  = document.getElementById('favoriteLink');
+    const account  = document.getElementById('account');
+
     const username = getUsernameCookie();
     if (username === "") { // show Login
         loginDiv.innerHTML = "<form class=\"main-header-controller-login\" id=\"loginedUsername\" action=\"/login\" method=\"get\" onclick=\"submitLoginForm()\">\n" +
                                 "<div class=\"main-header-controller-login-logo\"></div>\n" +
                              "</form>";
     } else { // show username instead of login
-        loginDiv.innerHTML = "<p class=\"logined-username\">" + username + "</p>"
-        dropDown.innerHTML = "<a class=\"logout\" href=\"/logout\">Log out</a>"
+        loginDiv.innerHTML = "<p class=\"logined-username\">" + username + "</p>";
+        favLink.innerHTML  = "<div class=\"main-header-favorite\" href=\"#\" aria-label=\"lookAtFavorites\"></div>";
+        account.innerHTML  = "<div class=\"main-header-controller-user-account\" >\n" +
+                                "<a class=\"account\" href=\"/account\">Account</a>\n" +
+                                "<div id=\"dropdown-content\">\n" +
+                                    "<a class=\"logout\" href=\"/logout\">Log out</a>\n" +
+                                "</div>\n" +
+                             "</div>";
     }
 }
 
