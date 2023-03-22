@@ -23,7 +23,6 @@ func Connect() *mongo.Client {
 	if err != nil {
 		log.Fatal("Failed to connect to db")
 	}
-	// fmt.Println("Success in connecting to MongoDB")
 	return client
 }
 
@@ -31,7 +30,6 @@ func Disconnect(client *mongo.Client) {
 	if err := client.Disconnect(context.TODO()); err != nil {
 		log.Fatal("Failed to disconnect from db")
 	}
-	// fmt.Println("Disconnected from MongoDB")
 }
 
 func GetAccessKeysToKeyboardsCollection(client *mongo.Client) *mongo.Collection {
