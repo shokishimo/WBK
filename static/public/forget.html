@@ -13,7 +13,7 @@
         <div class="main-header-container">
             <!--Header Left-->
             <img id="favicon" src="/static/images/favicon.png" alt="website icon" onclick="submitHomeForm()">
-            <form class="main-header-logo" id="home" action="/" method="get" onclick="submitHomeForm()" style="margin-left: -400px">
+            <form class="main-header-logo" id="home" action="/" method="get" onclick="submitHomeForm()">
                 <div class="main-header-logo-trigger"></div>
             </form>
         </div>
@@ -27,7 +27,7 @@
                 <h2>Fill in your email</h2>
                 <form action="/forget" method="post">
                     <div class="user-box">
-                        <label name="email">Email</label>
+                        <div><label name="email">Email</label></div>
                         <input type="text" name="email" required="required">
                     </div>
 

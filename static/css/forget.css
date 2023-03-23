@@ -16,6 +16,7 @@ body {
     margin: auto;
     color: #3e3e3e;
     padding: 20px 0;
+    font-size: 18px;
 }
 
 .forgot-box {
@@ -25,65 +26,56 @@ body {
     box-shadow: 0 0 10px #3e3e3e;
     margin-left: 50%;
     transform: translate(-50%, 0%);
+    margin-bottom: 30px;
 }
 
 .user-box {
     margin-bottom: 20px;
+    display: block;
 }
 
-/*.forgot-box .user-box input {*/
-/*    position: relative;*/
-/*    width: 100%;*/
-/*    padding: 5px 0;*/
-/*    font-size: 16px;*/
-/*    color: #3e3e3e;*/
-/*    border: none;*/
-/*    border-bottom: 1px solid #3e3e3e;*/
-/*    outline: none;*/
-/*    background: transparent;*/
-/*}*/
+.user-box div {
+    text-align: left;
+    padding-left: 10%;
+}
 
-/*.forgot-box .user-box label {*/
-/*    position: relative;*/
-/*    font-size: 16px;*/
-/*    color: #3e3e3e;*/
-/*    pointer-events: none;*/
-/*    transition: .5s;*/
-/*}*/
+.user-box label {
+    font-size: 16px;
+    color: #3e3e3e;
+}
 
-/*.submit-button {*/
-/*    padding: 10px 20px;*/
-/*    color: lightgreen;*/
-/*    font-size: 16px;*/
-/*    text-decoration: none;*/
-/*    text-transform: uppercase;*/
-/*    overflow: hidden;*/
-/*    transition: .5s;*/
-/*    letter-spacing: 4px;*/
-/*    border: 2px solid lightgreen;*/
-/*    border-radius: 8px;*/
-/*    transform: translateX(90%);*/
-/*    cursor: pointer;*/
-/*}*/
+.user-box input {
+    width: 80%;
+    padding: 5px 0;
+    font-size: 16px;
+    color: #3e3e3e;
+    border: none;
+    border-bottom: 1px solid #3e3e3e;
+    outline: none;
+    background: transparent;
+}
 
-/*.submit-button:hover {*/
-/*    box-shadow: 0 0 5px lightgreen;*/
-/*}*/
+.submit-button {
+    padding: 10px 20px;
+    color: lightgreen;
+    font-size: 18px;
+    text-decoration: none;
+    font-weight: bold;
+    text-transform: uppercase;
+    overflow: hidden;
+    letter-spacing: 4px;
+    background-color: white;
+    border: 2px solid lightgreen;
+    border-radius: 8px;
+    transition: .5s;
+    transform: translate(0%, 0%);
+    cursor: pointer;
+    margin-bottom: 20px;
+}
 
-/*#login {*/
-/*    font-size: 15px;*/
-/*    text-transform: none;*/
-/*    margin: auto;*/
-/*    padding-top: 15px;*/
-/*    width: 60%;*/
-/*    text-align: center;*/
-/*}*/
-
-/*#login a {*/
-/*    margin: auto;*/
-/*    color: mediumpurple;*/
-/*    text-decoration: none;*/
-/*}*/
+.submit-button:hover {
+    box-shadow: 0 0 8px lightgreen;
+}
 
 /* Use a media query to add a breakpoint at 500px: */
 @media screen and (max-width: 500px) {

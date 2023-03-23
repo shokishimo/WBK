@@ -7,6 +7,16 @@
     <link rel="stylesheet" href="/static/css/verifyPasscode.css">
 </head>
 <body>
+    <!--header-->
+    <header class="main-header">
+        <div class="main-header-container">
+            <!--Header Left-->
+            <img id="favicon" src="/static/images/favicon.png" alt="website icon" onclick="submitHomeForm()">
+            <form class="main-header-logo" id="home" action="/" method="get" onclick="submitHomeForm()">
+                <div class="main-header-logo-trigger"></div>
+            </form>
+        </div>
+    </header>
     <div class="passcode-container">
         <h2>Enter Passcode that is sent to your email</h2>
         <form action="/verifyPasscode" method="post">
@@ -32,6 +42,15 @@
             </div>
         </form>
     </div>
+
+    <!--footer-->
+    <footer>
+        <p>Copyright 2023 What's the Best Keyboard. All rights reserved.</p>
+    </footer>
+
+    <script src="/static/js/header0.js"></script>
     <script src="/static/js/verifyPasscode.js"></script>
+    <link rel="stylesheet" href="/static/css/header0.css">
+    <link rel="stylesheet" href="/static/css/footer.css">
 </body>
 </html>

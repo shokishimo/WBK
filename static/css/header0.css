@@ -43,6 +43,7 @@ form {
 .main-header-logo {
     display: flex;
     align-items: center;
+    margin-left: -400px;
 }
 
 .main-header-logo-trigger {
@@ -59,4 +60,11 @@ form {
     background-size: contain;
     border: none;
     z-index: 5;
+}
+
+/* Use a media query to add a breakpoint at 500px: */
+@media screen and (max-width: 500px) {
+    .main-header-logo {
+        margin-left: 25px;
+    }
 }
