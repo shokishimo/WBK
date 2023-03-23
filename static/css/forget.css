@@ -1,146 +1,93 @@
-/*------------ Header ------------*/
-.main-header {
-    position: relative;
-    top: 0;
-    right: 0;
-    left: 0;
-    height: 50px;
-    font-size: 13px;
-    color: #2d2d2d;
-    background-color: #efefef;
-}
-
-.main-header-container {
-    position: relative;
-    display: flex;
-    justify-content: center;
-    height: 50px;
-    padding: 0;
-}
-
-#favicon {
-    margin-right: 20px;
-}
-
-/* Header Left */
-.main-header-logo {
-    display: flex;
-    align-items: center;
-}
-
-.main-header-logo-trigger {
-    position: relative;
-    display: flex;
-    align-items: center;
-    height: 100%;
-    cursor: pointer;
-
-    width: 150px;
-    background-image: url("../images/siteLogo.png");
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: contain;
-    border: none;
-    z-index: 999;
-}
-
-
 /*------------ Body --------------*/
 body {
     margin: auto;
 }
 
-.forgot-box {
-    position: absolute;
-    top: 40%;
-    left: 50%;
-    background: #efefef;
-    width: 350px;
-    padding: 30px;
-    transform: translate(-50%, -50%);
-    border-radius: 10px;
-    box-shadow: 0 0 10px #3e3e3e;
+.main-container {
+    text-align: center;
+}
+
+.main-container h1 {
+    padding: 20px 0;
+    font-size: 20px;
 }
 
 .forgot-box h2 {
     margin: auto;
     color: #3e3e3e;
-    text-align: center;
+    padding: 20px 0;
+}
+
+.forgot-box {
+    padding: 0;
+    background: #efefef;
+    border-radius: 10px;
+    box-shadow: 0 0 10px #3e3e3e;
+    margin-left: 50%;
+    transform: translate(-50%, 0%);
 }
 
 .user-box {
     margin-bottom: 20px;
 }
 
-.forgot-box .user-box input {
-    position: relative;
-    width: 100%;
-    padding: 5px 0;
-    font-size: 16px;
-    color: #3e3e3e;
-    border: none;
-    border-bottom: 1px solid #3e3e3e;
-    outline: none;
-    background: transparent;
-}
+/*.forgot-box .user-box input {*/
+/*    position: relative;*/
+/*    width: 100%;*/
+/*    padding: 5px 0;*/
+/*    font-size: 16px;*/
+/*    color: #3e3e3e;*/
+/*    border: none;*/
+/*    border-bottom: 1px solid #3e3e3e;*/
+/*    outline: none;*/
+/*    background: transparent;*/
+/*}*/
 
-.forgot-box .user-box label {
-    position: relative;
-    font-size: 16px;
-    color: #3e3e3e;
-    pointer-events: none;
-    transition: .5s;
-}
+/*.forgot-box .user-box label {*/
+/*    position: relative;*/
+/*    font-size: 16px;*/
+/*    color: #3e3e3e;*/
+/*    pointer-events: none;*/
+/*    transition: .5s;*/
+/*}*/
 
-.submit-button {
-    padding: 10px 20px;
-    color: lightgreen;
-    font-size: 16px;
-    text-decoration: none;
-    text-transform: uppercase;
-    overflow: hidden;
-    transition: .5s;
-    letter-spacing: 4px;
-    border: 2px solid lightgreen;
-    border-radius: 8px;
-    transform: translateX(90%);
-    cursor: pointer;
-}
+/*.submit-button {*/
+/*    padding: 10px 20px;*/
+/*    color: lightgreen;*/
+/*    font-size: 16px;*/
+/*    text-decoration: none;*/
+/*    text-transform: uppercase;*/
+/*    overflow: hidden;*/
+/*    transition: .5s;*/
+/*    letter-spacing: 4px;*/
+/*    border: 2px solid lightgreen;*/
+/*    border-radius: 8px;*/
+/*    transform: translateX(90%);*/
+/*    cursor: pointer;*/
+/*}*/
 
-.submit-button:hover {
-    box-shadow: 0 0 5px lightgreen;
-}
+/*.submit-button:hover {*/
+/*    box-shadow: 0 0 5px lightgreen;*/
+/*}*/
 
-#login {
-    font-size: 15px;
-    text-transform: none;
-    margin: auto;
-    padding-top: 15px;
-    width: 60%;
-    text-align: center;
-}
+/*#login {*/
+/*    font-size: 15px;*/
+/*    text-transform: none;*/
+/*    margin: auto;*/
+/*    padding-top: 15px;*/
+/*    width: 60%;*/
+/*    text-align: center;*/
+/*}*/
 
-#login a {
-    margin: auto;
-    color: mediumpurple;
-    text-decoration: none;
-}
-
-/*------------ Footer ------------*/
-footer {
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    color: #fff;
-    background-color: #3e3e3e;
-    padding: 2rem 0;
-    text-align: center;
-}
+/*#login a {*/
+/*    margin: auto;*/
+/*    color: mediumpurple;*/
+/*    text-decoration: none;*/
+/*}*/
 
 /* Use a media query to add a breakpoint at 500px: */
 @media screen and (max-width: 500px) {
     .forgot-box {
-        width: 300px;
+        width: 320px;
     }
 }

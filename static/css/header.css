@@ -1,0 +1,135 @@
+/* Header Middle */
+.main-header-search {
+    display: flex;
+    align-items: center;
+    width: 420px;
+}
+
+#main-header-search-form {
+    position: relative;
+    width: 100%;
+}
+
+.main-header-search-label {
+    position: relative;
+}
+
+.main-header-search-icon {
+    position: relative;
+    margin-right: -25px;
+    color: #2d2d2d;
+    width: 20px;
+    height: 20px;
+    z-index: 5;
+    cursor: pointer;
+}
+
+.main-header-search-input {
+    width: 100%;
+    height: 30px;
+    padding: 0 10px 0 38px;
+    font-size: 12px;
+    font-weight: bold;
+    line-height: 30px;
+    background-color: #fff;
+    border: 0;
+    outline: 0;
+    border-radius: 8px;
+}
+
+/* Header Right */
+.main-header-controller {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+}
+
+/*login*/
+.main-header-controller-login {
+    position: relative;
+    display: flex;
+    align-items: center;
+    height: 100%;
+    cursor: pointer;
+    margin-right: 30px;
+}
+
+.main-header-controller-login-logo {
+    position: relative;
+    display: flex;
+    align-items: center;
+    pointer-events: none;
+    cursor: pointer;
+
+    height: 100%;
+    width: 35px;
+    background-image: url("../images/loginLogo.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    border: none;
+    z-index: 5;
+}
+
+.logined-username {
+    position: relative;
+    display: flex;
+    align-items: center;
+    height: 100%;
+    margin-right: 30px;
+    font-size: 14px;
+}
+
+/*fav*/
+.main-header-favorite {
+    position: relative;
+    display: flex;
+    align-items: center;
+    height: 100%;
+    cursor: pointer;
+    margin-right: 30px;
+
+    width: 20px;
+    background-image: url("../images/favLogo.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    border: none;
+    z-index: 5;
+}
+
+/*account*/
+.main-header-controller-user-account {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+    width: 60px;
+    border: none;
+    padding-top: 15px;
+}
+
+.account {
+    font-size: 15px;
+    text-decoration: none;
+    color: black;
+}
+
+#dropdown-content {
+    display: none;
+    position: absolute;
+    width: 50px;
+    z-index: 5;
+}
+
+#dropdown-content a {
+    color: black;
+    width: 50px;
+    display: block;
+    font-size: 15px;
+    padding: 10px 0 0;
+    text-decoration: none;
+}
+
+.main-header-controller-user-account:hover #dropdown-content {display: block;}
+.account:hover {color: springgreen;}
+#dropdown-content a:hover {color: springgreen;}

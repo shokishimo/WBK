@@ -14,7 +14,8 @@
     <header class="main-header">
         <div class="main-header-container">
             <!--Header Left-->
-            <form class="main-header-logo" id="home" action="/" method="get" onclick="submitHomeForm()">
+            <img id="favicon" src="/static/images/favicon.png" alt="website icon" onclick="submitHomeForm()">
+            <form class="main-header-logo" id="home" action="/" method="get" onclick="submitHomeForm()" style="margin-left: -400px">
                 <div class="main-header-logo-trigger"></div>
             </form>
         </div>
@@ -62,12 +63,9 @@
     </footer>
 </div>
 
-    <link rel="stylesheet" href="/static/css/home.css">
+    <script src="/static/js/header0.js"></script>
+    <link rel="stylesheet" href="/static/css/header0.css">
+    <link rel="stylesheet" href="/static/css/footer.css">
     <link rel="stylesheet" href="/static/css/login.css">
-    <script>
-        function submitHomeForm() {
-            document.getElementById("home").submit();
-        }
-    </script>
 </body>
 </html>

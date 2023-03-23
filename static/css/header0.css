@@ -1,0 +1,62 @@
+h1, h2, h3, h4, h5, h6 {
+    font-size: 100%;
+    font-weight: normal;
+    margin: auto;
+}
+body, h1, h2, h3, h4, h5, h6, p, button, select {
+    margin: 0;
+}
+form {
+    display: block;
+    margin-top: 0;
+}
+
+/*------------ Header ------------*/
+#favicon {
+    width: 50px;
+    height: 50px;
+    margin-right: -110px;
+    cursor: pointer;
+    z-index: 6;
+}
+
+.main-header {
+    position: relative;
+    top: 0;
+    right: 0;
+    left: 0;
+    height: 50px;
+    font-size: 13px;
+    color: #2d2d2d;
+    background-color: #efefef;
+}
+
+.main-header-container {
+    position: relative;
+    display: flex;
+    justify-content: space-evenly;
+    height: 50px;
+    padding: 0;
+}
+
+/* Header Left */
+.main-header-logo {
+    display: flex;
+    align-items: center;
+}
+
+.main-header-logo-trigger {
+    position: relative;
+    display: flex;
+    align-items: center;
+    height: 100%;
+    cursor: pointer;
+
+    width: 150px;
+    background-image: url("../images/siteLogo.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    border: none;
+    z-index: 5;
+}

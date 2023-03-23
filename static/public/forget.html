@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>WBK: Forgot password</title>
+    <link rel="icon" type="image/png" href="/static/images/favicon.png">
 </head>
 <body>
 <div id="body-container">
@@ -12,7 +13,7 @@
         <div class="main-header-container">
             <!--Header Left-->
             <img id="favicon" src="/static/images/favicon.png" alt="website icon" onclick="submitHomeForm()">
-            <form class="main-header-logo" id="home" action="/" method="get" onclick="submitHomeForm()">
+            <form class="main-header-logo" id="home" action="/" method="get" onclick="submitHomeForm()" style="margin-left: -400px">
                 <div class="main-header-logo-trigger"></div>
             </form>
         </div>
@@ -20,20 +21,21 @@
 
     <!--main-->
     <main>
-        <h1 style="text-align: center">Forgot your password?</h1>
-        <div class="forgot-box">
-            <h2>Fill in your email</h2>
-            <form action="/forget" method="post">
-                <div class="user-box">
-                    <label name="email">Email</label>
-                    <input type="text" name="email" required="required">
-                </div>
+        <div class="main-container">
+            <h1>Forgot your password?</h1>
+            <div class="forgot-box">
+                <h2>Fill in your email</h2>
+                <form action="/forget" method="post">
+                    <div class="user-box">
+                        <label name="email">Email</label>
+                        <input type="text" name="email" required="required">
+                    </div>
 
-                <div class="button-form">
-                    <input type="submit" class="submit-button" value="Submit">
-                </div>
-            </form>
-
+                    <div class="button-form">
+                        <input type="submit" class="submit-button" value="Submit">
+                    </div>
+                </form>
+            </div>
         </div>
     </main>
 
@@ -43,12 +45,10 @@
     </footer>
 </div>
 
+<script src="/static/js/header0.js"></script>
+<link rel="stylesheet" href="/static/css/header0.css">
 <link rel="stylesheet" href="/static/css/forget.css">
-<script>
-    function submitHomeForm() {
-        document.getElementById("home").submit();
-    }
-</script>
+<link rel="stylesheet" href="/static/css/footer.css">
 
 </body>
 </html>

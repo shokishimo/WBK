@@ -2,10 +2,6 @@ function submitLoginForm() {
     document.getElementById("loginedUsername").submit();
 }
 
-function submitHomeForm() {
-    document.getElementById("home").submit();
-}
-
 function searchKeyboard() {
     document.getElementById("main-header-search-form").submit();
 }

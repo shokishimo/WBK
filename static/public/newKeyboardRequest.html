@@ -2,9 +2,31 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>WBK: New Request</title>
+    <link rel="icon" type="image/png" href="/static/images/favicon.png">
 </head>
 <body>
-Request-application is going to be here soon!
+<div id="body-container">
+    <!--header-->
+    <header class="main-header">
+        <div class="main-header-container">
+            <!--Header Left-->
+            <img id="favicon" src="/static/images/favicon.png" alt="website icon" onclick="submitHomeForm()">
+            <form class="main-header-logo" id="home" action="/" method="get" onclick="submitHomeForm()" style="margin-left: -400px">
+                <div class="main-header-logo-trigger"></div>
+            </form>
+        </div>
+    </header>
+
+    <!--footer-->
+    <footer>
+        <p>Copyright 2023 What's the Best Keyboard. All rights reserved.</p>
+    </footer>
+</div>
+
+<script src="/static/js/header0.js"></script>
+<link rel="stylesheet" href="/static/css/header0.css">
+<link rel="stylesheet" href="/static/css/footer.css">
 </body>
 </html>
