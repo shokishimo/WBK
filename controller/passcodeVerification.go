@@ -48,11 +48,10 @@ func VerifyPassGet(w http.ResponseWriter) {
 
 // VerifyPassPost handles HTTP Post request
 func VerifyPassPost(w http.ResponseWriter, r *http.Request) error {
-	var inPasscode string
+	inPasscode := ""
 	for i := 1; i <= 6; i++ {
-		inPasscode = inPasscode + r.FormValue("in"+strconv.Itoa(i))
+		inPasscode += r.FormValue("in" + strconv.Itoa(i))
 	}
-
 	// validate if the passcode is correct
 	client := db.Connect()
 	defer db.Disconnect(client)

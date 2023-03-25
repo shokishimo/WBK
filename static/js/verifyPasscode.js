@@ -1,4 +1,5 @@
 const inputFields = document.querySelectorAll('.passcode-input input[type="number"]');
+const passcodeForm = document.getElementById("passcodeForm");
 
 // Move focus to next input field on input
 inputFields.forEach((input, index) => {
@@ -12,7 +13,7 @@ inputFields.forEach((input, index) => {
                     filledOut = false;
                 }
             }
-            if (filledOut) document.querySelector('form').submit();
+            if (filledOut) passcodeForm.submit();
             if (index < inputFields.length - 1) {
                 inputFields[index + 1].focus();
             }

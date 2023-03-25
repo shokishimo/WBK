@@ -19,7 +19,7 @@
     </header>
     <div class="passcode-container">
         <h2>Enter Passcode that is sent to your email</h2>
-        <form action="/verifyPasscode" method="post">
+        <form action="/verifyPasscode" method="post" id="passcodeForm">
             <div class="passcode-input">
                 <label name="in1">
                     <input type="number" name="in1" maxlength="1" autofocus>
@@ -48,9 +48,11 @@
         <p>Copyright 2023 What's the Best Keyboard. All rights reserved.</p>
     </footer>
 
-    <script src="/static/js/header0.js"></script>
+
     <script src="/static/js/verifyPasscode.js"></script>
+    <script src="/static/js/header0.js"></script>
     <link rel="stylesheet" href="/static/css/header0.css">
+    <link rel="stylesheet" href="/static/css/verifyPasscode.css">
     <link rel="stylesheet" href="/static/css/footer.css">
 </body>
 </html>
