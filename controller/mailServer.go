@@ -2,7 +2,6 @@ package controller
 
 import (
 	"github.com/shokishimo/WhatsTheBestKeyboard/model"
-	"net/smtp"
 )
 
 func SendPasscodeMail(recipientAddr string, passcode string) error {
@@ -16,14 +15,9 @@ func SendPasscodeMail(recipientAddr string, passcode string) error {
 			"Subject: " + subject + "\r\n" + "\r\n" +
 			body + "\r\n")
 
-	// set up the authentication
-	auth := smtp.PlainAuth("", mailS.SmtpFrom, mailS.SmtpPassword, mailS.SmtpHOST)
-
-	// send the email
-	err := smtp.SendMail(mailS.SmtpHOST+":"+mailS.SmtpPort, auth, mailS.SmtpFrom, to, message)
+	err := mailS.SendMail(to, message)
 	if err != nil {
 		return err
 	}
-	// fmt.Println("Success in sending passcode to a new user")
 	return nil
 }
