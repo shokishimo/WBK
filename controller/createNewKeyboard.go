@@ -3,7 +3,7 @@ package controller
 import (
 	"context"
 	"encoding/json"
-	"github.com/shokishimo/WhatsTheBestKeyboard/db"
+	"github.com/shokishimo/WhatsTheBestKeyboard/database"
 	"github.com/shokishimo/WhatsTheBestKeyboard/model"
 	"net/http"
 )
@@ -23,13 +23,13 @@ func CreateNewKeyboardHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	client := db.Connect()
-	defer db.Disconnect(client)
+	db := database.Connect()
+	defer db.Disconnect()
 	// Obtain collection
-	collection := db.GetAccessKeysToKeyboardsCollection(client)
+	db = db.GetAccessKeysToKeyboardsCollection()
 
 	// begin insert data
-	_, err = collection.InsertOne(context.TODO(), keyboard)
+	_, err = db.GetCollection().InsertOne(context.TODO(), keyboard)
 
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)

@@ -2,7 +2,7 @@ package controller
 
 import (
 	"context"
-	"github.com/shokishimo/WhatsTheBestKeyboard/db"
+	"github.com/shokishimo/WhatsTheBestKeyboard/database"
 	"go.mongodb.org/mongo-driver/bson"
 	"net/http"
 )
@@ -16,13 +16,13 @@ func LogoutHandler(w http.ResponseWriter, r *http.Request) {
 
 	// delete the session id of the user in the database
 	hashedId := Hash(sessionId)
-	client := db.Connect()
-	defer db.Disconnect(client)
-	collection := db.GetAccessKeysToUsersCollection(client)
+	db := database.Connect()
+	defer db.Disconnect()
+	db = db.GetAccessKeysToUsersCollection()
 
 	filter := bson.M{"sessionid": hashedId}
 	update := bson.M{"$set": bson.M{"sessionid": ""}}
-	result, err := collection.UpdateOne(context.TODO(), filter, update)
+	result, err := db.GetCollection().UpdateOne(context.TODO(), filter, update)
 
 	// when an error happened in the transaction
 	if err != nil {

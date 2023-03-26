@@ -2,6 +2,7 @@ package model
 
 import (
 	"context"
+	"github.com/shokishimo/WhatsTheBestKeyboard/database"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
 )
@@ -17,8 +18,8 @@ type User struct {
 }
 
 // SaveUser stores the user to the specified collection
-func (theUser User) SaveUser(collection *mongo.Collection) error {
-	_, err := collection.InsertOne(context.TODO(), theUser)
+func (theUser User) SaveUser(db database.DB) error {
+	_, err := db.GetCollection().InsertOne(context.TODO(), theUser)
 	if err != nil {
 		return err
 	}
@@ -26,10 +27,10 @@ func (theUser User) SaveUser(collection *mongo.Collection) error {
 }
 
 // DeleteUser deletes the user from the specified collection
-func (theUser User) DeleteUser(collection *mongo.Collection) error {
+func (theUser User) DeleteUser(db database.DB) error {
 	filter := bson.M{"email": theUser.Email}
 
-	result, err := collection.DeleteOne(context.Background(), filter)
+	result, err := db.GetCollection().DeleteOne(context.Background(), filter)
 	if err != nil {
 		return err
 	}

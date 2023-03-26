@@ -2,7 +2,7 @@ package controller
 
 import (
 	"context"
-	"github.com/shokishimo/WhatsTheBestKeyboard/db"
+	"github.com/shokishimo/WhatsTheBestKeyboard/database"
 	"github.com/shokishimo/WhatsTheBestKeyboard/model"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo/options"
@@ -52,9 +52,9 @@ func handleLogin(w http.ResponseWriter, r *http.Request) string {
 	}
 
 	// check in database
-	client := db.Connect()
-	defer db.Disconnect(client)
-	collection := db.GetAccessKeysToUsersCollection(client)
+	db := database.Connect()
+	defer db.Disconnect()
+	db = db.GetAccessKeysToUsersCollection()
 
 	// create a new sessionID
 	sessionID := GenerateSessionID()
@@ -64,7 +64,7 @@ func handleLogin(w http.ResponseWriter, r *http.Request) string {
 	opt := options.FindOneAndUpdate().SetReturnDocument(options.After)
 	filter := bson.M{"email": email, "password": Hash(password)}
 	update := bson.M{"$set": bson.M{"sessionid": Hash(sessionID)}}
-	err := collection.FindOneAndUpdate(context.TODO(), filter, update, opt).Decode(&res)
+	err := db.GetCollection().FindOneAndUpdate(context.TODO(), filter, update, opt).Decode(&res)
 	if err != nil {
 		return "Error happened during some executions to database: " + err.Error()
 	}

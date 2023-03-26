@@ -2,7 +2,7 @@ package controller
 
 import (
 	"context"
-	"github.com/shokishimo/WhatsTheBestKeyboard/db"
+	"github.com/shokishimo/WhatsTheBestKeyboard/database"
 	"github.com/shokishimo/WhatsTheBestKeyboard/model"
 	"go.mongodb.org/mongo-driver/bson"
 	"net/http"
@@ -53,15 +53,15 @@ func signUpPost(w http.ResponseWriter, r *http.Request) string {
 		WorstKeys: []model.Keyboard{},
 	}
 
-	client := db.Connect()
-	collection := db.GetAccessKeysToUsersCollection(client)
-	defer db.Disconnect(client)
+	db := database.Connect()
+	defer db.Disconnect()
+	db = db.GetAccessKeysToUsersCollection()
 
 	// check if the input user already exists in the database
 	// Define the filter to find a specific document
 	var res model.User
 	filter := bson.M{"email": email}
-	err := collection.FindOne(context.TODO(), filter).Decode(&res)
+	err := db.GetCollection().FindOne(context.TODO(), filter).Decode(&res)
 	// when the user with the sessionID found
 	if err == nil {
 		w.WriteHeader(http.StatusNotAcceptable)
@@ -69,8 +69,8 @@ func signUpPost(w http.ResponseWriter, r *http.Request) string {
 	}
 
 	// save the user temporary
-	collection = db.GetAccessKeysToTemporaryUsersCollection(client)
-	err = theUser.SaveUser(collection)
+	db = db.GetAccessKeysToTemporaryUsersCollection()
+	err = theUser.SaveUser(db)
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
 		return "Failed to save the user"

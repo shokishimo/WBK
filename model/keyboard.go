@@ -3,7 +3,7 @@ package model
 import (
 	"context"
 	"fmt"
-	"github.com/shokishimo/WhatsTheBestKeyboard/db"
+	"github.com/shokishimo/WhatsTheBestKeyboard/database"
 	"go.mongodb.org/mongo-driver/bson"
 	"strconv"
 )
@@ -26,10 +26,10 @@ type Keyboard struct {
 }
 
 func GetRanks(topHowMany int) []Keyboard {
-	client := db.Connect()
-	defer db.Disconnect(client)
+	db := database.Connect()
+	defer db.Disconnect()
 	// Obtain collection
-	collection := db.GetAccessKeysToKeyboardsCollection(client)
+	db = db.GetAccessKeysToKeyboardsCollection()
 
 	// extract keyboard data from database based on their net ranking
 	var keyboards []Keyboard
@@ -37,7 +37,7 @@ func GetRanks(topHowMany int) []Keyboard {
 	for i := 1; i <= topHowMany; i++ {
 		var t string = strconv.Itoa(i)
 		filter := bson.M{"ranking": t}
-		err := collection.FindOne(context.TODO(), filter).Decode(&keyboard)
+		err := db.GetCollection().FindOne(context.TODO(), filter).Decode(&keyboard)
 		if err != nil {
 			fmt.Println(err.Error())
 			return nil

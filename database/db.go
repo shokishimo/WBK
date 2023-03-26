@@ -1,4 +1,4 @@
-package db
+package database
 
 import (
 	"context"
@@ -34,14 +34,14 @@ func Connect() DB {
 	}
 	client, err := mongo.Connect(context.TODO(), options.Client().ApplyURI(uri))
 	if err != nil {
-		log.Fatal("Failed to connect to db")
+		log.Fatal("Failed to connect to database")
 	}
 	return DB{client: client}
 }
 
 func (db DB) Disconnect() {
 	if err := db.client.Disconnect(context.TODO()); err != nil {
-		log.Fatal("Failed to disconnect from db")
+		log.Fatal("Failed to disconnect from database")
 	}
 }
 

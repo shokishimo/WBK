@@ -2,7 +2,7 @@ package controller
 
 import (
 	"context"
-	"github.com/shokishimo/WhatsTheBestKeyboard/db"
+	"github.com/shokishimo/WhatsTheBestKeyboard/database"
 	"github.com/shokishimo/WhatsTheBestKeyboard/model"
 	"go.mongodb.org/mongo-driver/bson"
 	"html/template"
@@ -53,15 +53,15 @@ func VerifyPassPost(w http.ResponseWriter, r *http.Request) error {
 		inPasscode += r.FormValue("in" + strconv.Itoa(i))
 	}
 	// validate if the passcode is correct
-	client := db.Connect()
-	defer db.Disconnect(client)
-	collection := db.GetAccessKeysToTemporaryUsersCollection(client)
+	db := database.Connect()
+	defer db.Disconnect()
+	db = db.GetAccessKeysToTemporaryUsersCollection()
 
 	// check if the input user already exists in the database
 	// Define the filter to find a specific document
 	var theUser model.User
 	filter := bson.M{"sessionid": inPasscode}
-	err := collection.FindOne(context.TODO(), filter).Decode(&theUser)
+	err := db.GetCollection().FindOne(context.TODO(), filter).Decode(&theUser)
 	// when the user with the passcode not found
 	if err != nil {
 		return err
@@ -78,9 +78,9 @@ func VerifyPassPost(w http.ResponseWriter, r *http.Request) error {
 	DeleteCookie(w, "email", theUser.Email)
 
 	// delete this user from the temporary and save user to the users table
-	err = theUser.DeleteUser(collection)
-	collection = db.GetAccessKeysToUsersCollection(client)
-	err = theUser.SaveUser(collection)
+	err = theUser.DeleteUser(db)
+	db = db.GetAccessKeysToUsersCollection()
+	err = theUser.SaveUser(db)
 	if err != nil {
 		return err
 	}
