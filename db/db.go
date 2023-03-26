@@ -9,7 +9,20 @@ import (
 	"os"
 )
 
-func Connect() *mongo.Client {
+type DB struct {
+	client     *mongo.Client
+	collection *mongo.Collection
+}
+
+func (db DB) GetClient() *mongo.Client {
+	return db.client
+}
+
+func (db DB) GetCollection() *mongo.Collection {
+	return db.collection
+}
+
+func Connect() DB {
 	var client *mongo.Client
 	var uri string
 	if err := godotenv.Load(); err != nil {
@@ -23,44 +36,34 @@ func Connect() *mongo.Client {
 	if err != nil {
 		log.Fatal("Failed to connect to db")
 	}
-	return client
+	return DB{client: client}
 }
 
-func Disconnect(client *mongo.Client) {
-	if err := client.Disconnect(context.TODO()); err != nil {
+func (db DB) Disconnect() {
+	if err := db.client.Disconnect(context.TODO()); err != nil {
 		log.Fatal("Failed to disconnect from db")
 	}
 }
 
-func GetAccessKeysToKeyboardsCollection(client *mongo.Client) *mongo.Collection {
-	godotenv.Load()
-	database := os.Getenv("DATABASE")
-	keyboardCollection := os.Getenv("COLLECTION_Keyboards")
-	if database == "" || keyboardCollection == "" {
-		log.Fatal("failed to get access keys to database; Error at `GetAccessKeysToKeyboardsCollection()`")
-	}
-	collection := client.Database(database).Collection(keyboardCollection)
-	return collection
+func (db DB) GetAccessKeysToKeyboardsCollection() DB {
+	return db.getAccessKeys("COLLECTION_Keyboards")
 }
 
-func GetAccessKeysToUsersCollection(client *mongo.Client) *mongo.Collection {
-	godotenv.Load()
-	database := os.Getenv("DATABASE")
-	userCollection := os.Getenv("COLLECTION_users")
-	if database == "" || userCollection == "" {
-		log.Fatal("failed to get access keys to database; Error at `GetAccessKeysToKeyboardsCollection()`")
-	}
-	collection := client.Database(database).Collection(userCollection)
-	return collection
+func (db DB) GetAccessKeysToUsersCollection() DB {
+	return db.getAccessKeys("COLLECTION_users")
 }
 
-func GetAccessKeysToTemporaryUsersCollection(client *mongo.Client) *mongo.Collection {
+func (db DB) GetAccessKeysToTemporaryUsersCollection() DB {
+	return db.getAccessKeys("COLLECTION_temporary_users")
+}
+
+func (db DB) getAccessKeys(collection string) DB {
 	godotenv.Load()
-	database := os.Getenv("DATABASE")
-	temporaryUserCollection := os.Getenv("COLLECTION_temporary_users")
-	if database == "" || temporaryUserCollection == "" {
-		log.Fatal("failed to get access keys to database; Error at `GetAccessKeysToTemporaryUsersCollection()`")
+	databaseName := os.Getenv("DATABASE")
+	collectionName := os.Getenv(collection)
+	if databaseName == "" || collectionName == "" {
+		log.Fatal("failed to get access keys to database; Error at `GetAccessKeys()`")
 	}
-	collection := client.Database(database).Collection(temporaryUserCollection)
-	return collection
+	db.collection = db.client.Database(databaseName).Collection(collectionName)
+	return db
 }
