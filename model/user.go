@@ -17,7 +17,7 @@ type User struct {
 }
 
 // SaveUser stores the user to the specified collection
-func SaveUser(theUser User, collection *mongo.Collection) error {
+func (theUser User) SaveUser(collection *mongo.Collection) error {
 	_, err := collection.InsertOne(context.TODO(), theUser)
 	if err != nil {
 		return err
@@ -26,7 +26,7 @@ func SaveUser(theUser User, collection *mongo.Collection) error {
 }
 
 // DeleteUser deletes the user from the specified collection
-func DeleteUser(theUser User, collection *mongo.Collection) error {
+func (theUser User) DeleteUser(collection *mongo.Collection) error {
 	filter := bson.M{"email": theUser.Email}
 
 	result, err := collection.DeleteOne(context.Background(), filter)

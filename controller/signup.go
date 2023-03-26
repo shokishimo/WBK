@@ -70,7 +70,7 @@ func signUpPost(w http.ResponseWriter, r *http.Request) string {
 
 	// save the user temporary
 	collection = db.GetAccessKeysToTemporaryUsersCollection(client)
-	err = model.SaveUser(theUser, collection)
+	err = theUser.SaveUser(collection)
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
 		return "Failed to save the user"
