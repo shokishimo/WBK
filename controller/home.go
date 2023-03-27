@@ -14,7 +14,7 @@ func HomeHandler(w http.ResponseWriter, r *http.Request) {
 	path := r.URL.Path
 	if path != "/" { // if endpoint is unknown
 		// Redirect to 404 page
-		http.Redirect(w, r, "/notFound?path="+path, http.StatusSeeOther)
+		http.Redirect(w, r, "/notFound?path="+path, http.StatusTemporaryRedirect)
 	}
 
 	ServePublicHome(w, r)
