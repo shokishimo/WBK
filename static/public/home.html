@@ -59,16 +59,18 @@
                     {{range .}}
                         {{if eq .Ranking "1"}}
                             <div class="ranking">
+                                <form action="/keyboarddetail" method="get" id={{.Ranking}}>
                                 <div class="picture-container">
-                                    <img  class="picture" src={{.Url}} alt="keyboard image">
+                                    <img class="picture" src={{.Url}} alt="keyboard image" onclick="keyboardDetail('{{js .Ranking}}')">
                                     <div class="ranking-badge" id="ranking-badge1">
-                                        <p class="ranking-letter">{{.Ranking}}</p>
+                                        <p class="ranking-letter"><input hidden="hidden" name="ranking" value={{.Ranking}}>{{.Ranking}}</p>
                                     </div>
                                     <div class="make">{{.Make}}</div>
                                 </div>
-                                <div class="description">{{.Name}}</div>
+                                <div class="description"><input hidden="hidden" name="name" value={{.Name}}>{{.Name}}</div>
                                 <div class="price">{{.Price}}</div>
                                 <div class="score">Score: {{.Score}} /10 &nbsp; (# Votes: {{.NumVotes}})</div>
+                                </form>
                             </div>
                         {{else if eq .Ranking "2"}}
                             <div class="ranking">
@@ -104,7 +106,7 @@
                         {{if ge .Ranking "4"}}
                             <div class="ranking">
                                 <div class="picture-container">
-                                    <img  class="picture" src={{.Url}} alt="keyboard image">
+                                    <img class="picture" src={{.Url}} alt="keyboard image">
                                     <div class="ranking-badge" id="ranking-badge">
                                         <p class="ranking-letter">{{.Ranking}}</p>
                                     </div>

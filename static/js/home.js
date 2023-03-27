@@ -6,6 +6,10 @@ function searchKeyboard() {
     document.getElementById("main-header-search-form").submit();
 }
 
+function keyboardDetail(ranking) {
+    document.getElementById(ranking).submit();
+}
+
 window.onload = function() {
     // login/username and rendering
     const loginDiv = document.getElementById('login-switch');
