@@ -7,7 +7,7 @@ function searchKeyboard() {
 }
 
 function keyboardDetail(ranking) {
-    document.getElementById(ranking).submit();
+    document.getElementById("rank" + ranking).submit();
 }
 
 window.onload = function() {
