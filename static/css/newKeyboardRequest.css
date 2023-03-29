@@ -1,0 +1,64 @@
+.request-body {
+    position: relative;
+    text-align: center;
+    width: 400px;
+    padding: 30px;
+    margin: 40px auto 40px;
+    background-color: antiquewhite;
+    border-radius: 10px;
+    box-shadow: 0 0 10px #3e3e3e;
+}
+
+.title {
+    margin-bottom: 20px;
+    font-size: 22px;
+}
+
+.input-div {
+    margin-bottom: 20px;
+}
+
+.input-div input {
+    position: relative;
+    width: 100%;
+    padding: 5px 0;
+    height: 25px;
+    font-size: 16px;
+    color: #3e3e3e;
+    border: none;
+    border-bottom: 1px solid #3e3e3e;
+    outline: none;
+    background: transparent;
+}
+
+.input-div label {
+    position: relative;
+    font-size: 16px;
+    color: #3e3e3e;
+    pointer-events: none;
+    transition: .5s;
+}
+
+
+.submit-button {
+    padding: 10px 20px;
+    color: orangered;
+    background-color: antiquewhite;
+    font-size: 18px;
+    font-weight: bold;
+    text-transform: uppercase;
+    overflow: hidden;
+    transition: .5s;
+    letter-spacing: 4px;
+    border: 1px solid orangered;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+
+/* Use a media query to add a breakpoint at 500px: */
+@media screen and (max-width: 500px) {
+    .request-body {
+        width: 300px;
+    }
+}

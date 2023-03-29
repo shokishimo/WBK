@@ -23,19 +23,20 @@
     <div class="main-container">
         <div class="request-body">
             <form id="request-form" action="/newKeyboardRequest" method="post">
-                <div class="nickname-div">
+                <h1 class="title">New Keyboard</h1>
+                <div class="input-div" id="nickname-div">
                     <label name="nickname">Nickname</label>
                     <input type="text" name="nickname" required="required">
                 </div>
-                <div class="keyboard-div">
+                <div class="input-div" id="keyboard-div">
                     <label name="keyboard">Keyboard Name</label>
                     <input type="text" name="keyboard" required="required">
                 </div>
-                <div class="url-div">
+                <div class="input-div" id="url-div">
                     <label name="url">Keyboard URL</label>
                     <input type="text" name="url" required="required">
                 </div>
-                <div class="button-form">
+                <div id="button-form">
                     <input type="submit" class="submit-button" value="Submit">
                 </div>
             </form>
@@ -50,6 +51,7 @@
 
 <script src="/static/js/header0.js"></script>
 <link rel="stylesheet" href="/static/css/header0.css">
+<link rel="stylesheet" href="/static/css/newKeyboardRequest.css">
 <link rel="stylesheet" href="/static/css/footer.css">
 </body>
 </html>

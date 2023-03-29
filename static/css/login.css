@@ -47,6 +47,7 @@ p {
     padding-top: 10px;
     padding-bottom: 10px;
     font-size: 16px;
+    height: 25px;
 }
 
 .password-class {
@@ -66,7 +67,7 @@ p {
     border: none;
     background-color: limegreen;
     padding: 10px 100px;
-    margin-top: 10px;
+    margin-top: 25px;
     margin-bottom: 10px;
     font-weight: bold;
     cursor: pointer;
