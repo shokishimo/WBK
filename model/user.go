@@ -30,7 +30,7 @@ func (theUser User) SaveUser(db database.DB) error {
 func (theUser User) DeleteUser(db database.DB) error {
 	filter := bson.M{"email": theUser.Email}
 
-	result, err := db.GetCollection().DeleteOne(context.Background(), filter)
+	result, err := db.GetCollection().DeleteOne(context.TODO(), filter)
 	if err != nil {
 		return err
 	}
