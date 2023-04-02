@@ -25,6 +25,23 @@ type Keyboard struct {
 	Other       string `json:"other"`
 }
 
+func FindKeyboardWithNameAndRanking(name string, rank string) (error, Keyboard) {
+	db := database.Connect()
+	defer db.Disconnect()
+	db = db.GetAccessKeysToKeyboardsCollection()
+
+	// find keyboard
+	var theKeyboard Keyboard
+	filter := bson.M{"name": name, "ranking": rank}
+	err := db.GetCollection().FindOne(context.TODO(), filter).Decode(&theKeyboard)
+	// when the keyboard found
+	if err != nil {
+		return err, Keyboard{}
+	}
+
+	return nil, theKeyboard
+}
+
 func GetRanks(topHowMany int) []Keyboard {
 	db := database.Connect()
 	defer db.Disconnect()
