@@ -35,6 +35,10 @@
     cursor: pointer;
 }
 
+.picture-container:hover {
+    transform: scale(0.95);
+}
+
 .ranking-badge {
     height: 30px;
     width: 30px;
@@ -89,6 +93,7 @@
 
 .btn-container:hover {
     background-color: #d3001b;
+    transform: scale(0.9);
 }
 
 #request-message {

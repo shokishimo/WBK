@@ -55,6 +55,9 @@
     cursor: pointer;
 }
 
+.submit-button:hover {
+    transform: scale(0.95);
+}
 
 /* Use a media query to add a breakpoint at 500px: */
 @media screen and (max-width: 500px) {

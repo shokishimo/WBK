@@ -89,6 +89,10 @@ body {
     transition: .5s;
 }
 
+.button-form {
+    text-align: center;
+}
+
 .submit-button {
     padding: 10px 20px;
     color: lightgreen;
@@ -100,12 +104,12 @@ body {
     letter-spacing: 4px;
     border: 2px solid lightgreen;
     border-radius: 8px;
-    transform: translateX(90%);
     cursor: pointer;
 }
 
 .submit-button:hover {
     box-shadow: 0 0 5px lightgreen;
+    transform: scale(0.95);
 }
 
 #login {
