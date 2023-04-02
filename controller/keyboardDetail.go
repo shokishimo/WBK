@@ -3,6 +3,7 @@ package controller
 import (
 	"fmt"
 	"github.com/shokishimo/WhatsTheBestKeyboard/model"
+	"html/template"
 	"net/http"
 )
 
@@ -30,6 +31,20 @@ func keyboardDetail(w http.ResponseWriter, r *http.Request) error {
 	err, theKeyboard := model.FindKeyboardWithNameAndRanking(name, ranking)
 	if err != nil {
 		return err
+	}
+
+	// render a page
+	tmpl, err := template.ParseFiles("static/public/keyboardDetail.html")
+	if err != nil {
+		_, _ = w.Write([]byte(err.Error()))
+		return nil
+	}
+
+	w.Header().Set("Content-Type", "text/html")
+	err = tmpl.Execute(w, theKeyboard)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return nil
 	}
 
 	return nil
