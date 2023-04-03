@@ -1,10 +1,7 @@
 package controller
 
 import (
-	"context"
-	"github.com/shokishimo/WhatsTheBestKeyboard/database"
 	"github.com/shokishimo/WhatsTheBestKeyboard/model"
-	"go.mongodb.org/mongo-driver/bson"
 	"net/http"
 	"strings"
 )
@@ -41,38 +38,19 @@ func signUpPost(w http.ResponseWriter, r *http.Request) string {
 	// parse username from email
 	separatedEmail := strings.Split(email, "@")
 	username := separatedEmail[len(separatedEmail)-2]
-	passcode := GeneratePasscode()
 
-	theUser := model.User{
-		Username:  username,
-		Email:     email,
-		Password:  Hash(password),
-		SessionID: passcode,
-		Fav:       []model.Keyboard{},
-		BestKeys:  []model.Keyboard{},
-		WorstKeys: []model.Keyboard{},
-	}
+	theUser := model.CreatNewUser(username, email, password)
+	passcode := theUser.SessionID[theUser.ActiveUserCount-1]
 
-	db := database.Connect()
-	defer db.Disconnect()
-	db = db.GetAccessKeysToUsersCollection()
-
-	// check if the input user already exists in the database
-	// Define the filter to find a specific document
-	var res model.User
-	filter := bson.M{"email": email}
-	err := db.GetCollection().FindOne(context.TODO(), filter).Decode(&res)
-	// when the user with the sessionID found
+	// check if a user is already in the database
+	_, err := model.FindUserWithEmail(email)
 	if err == nil {
-		w.WriteHeader(http.StatusNotAcceptable)
 		return "http.StatusNotAcceptable; already a user with the same email exists"
 	}
 
 	// save the user temporary
-	db = db.GetAccessKeysToTemporaryUsersCollection()
-	err = theUser.SaveUser(db)
+	err = theUser.SaveUserToTemporary()
 	if err != nil {
-		w.WriteHeader(http.StatusInternalServerError)
 		return "Failed to save the user"
 	}
 
