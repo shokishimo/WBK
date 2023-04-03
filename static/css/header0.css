@@ -60,7 +60,7 @@ form {
     background-size: contain;
     border: none;
     z-index: 5;
-    transform: translateX(50%);
+    transform: translateX(55%);
 }
 
 /* Use a media query to add a breakpoint at 500px: */
