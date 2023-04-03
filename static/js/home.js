@@ -38,7 +38,6 @@ function getUsernameCookie(){
     for(let i = 0; i < cookieArr.length; i++) {
         let cookiePair = cookieArr[i].split("=");
         if(cookiePair[0].trim() === 'username') {
-            console.log(cookiePair[1]);
             return cookiePair[1];
         }
     }

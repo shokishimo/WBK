@@ -49,10 +49,10 @@ form {
 .main-header-logo-trigger {
     position: relative;
     display: flex;
+    visibility: visible;
     align-items: center;
     height: 100%;
     cursor: pointer;
-
     width: 150px;
     background-image: url("../images/siteLogo.png");
     background-repeat: no-repeat;
@@ -60,11 +60,18 @@ form {
     background-size: contain;
     border: none;
     z-index: 5;
+    transform: translateX(50%);
 }
 
 /* Use a media query to add a breakpoint at 500px: */
 @media screen and (max-width: 500px) {
     .main-header-logo {
         margin-left: 25px;
+    }
+    .main-header-logo-trigger {
+        visibility: hidden;
+    }
+    .main-header-search {
+        margin-left: -50px;
     }
 }
