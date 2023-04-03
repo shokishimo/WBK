@@ -20,6 +20,24 @@
     </header>
 
     <main>
+        <div class="container">
+            <div class="keyboard-name">{{.Name}} by {{.Make}}</div>
+            <div class="picture-container">
+                <img class="picture" src={{.Url}} alt="keyboard image">
+                {{if le .Ranking "3"}}
+                    <div class="ranking-badge" id="ranking-badge{{.Ranking}}">
+                        <p class="ranking-letter">{{.Ranking}}</p>
+                    </div>
+                {{else}}
+                    <div class="ranking-badge" id="ranking-badge">
+                        <p class="ranking-letter">{{.Ranking}}</p>
+                    </div>
+                {{end}}
+
+            </div>
+            <div class="price">{{.Price}}</div>
+            <div class="score">Score: {{.Score}} /10 &nbsp; (# Votes: {{.NumVotes}})</div>
+        </div>
 
     </main>
 
@@ -30,6 +48,7 @@
 
     <script src="/static/js/header0.js"></script>
     <link rel="stylesheet" href="/static/css/header0.css">
+    <link rel="stylesheet" href="/static/css/keyboardDetail.css">
     <link rel="stylesheet" href="/static/css/footer.css">
 </div>
 </body>

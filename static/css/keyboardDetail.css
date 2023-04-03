@@ -1,0 +1,80 @@
+main {
+    margin: 20px 0;
+}
+
+/*main part*/
+.container {
+    text-align: center;
+}
+
+.picture-container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+}
+
+.picture {
+    height: 525px;
+    width: 700px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    border: none;
+    z-index: 3;
+    margin: 20px 0;
+}
+
+.ranking-badge {
+    position: absolute;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    border: none;
+    z-index: 5;
+    height: 50px;
+    width: 50px;
+    top: 20px;
+    left: 23.5%;
+}
+
+#ranking-badge1 {
+    background-image: url("/static/images/rankingBadge1.png");
+}
+
+#ranking-badge2 {
+    background-image: url("/static/images/rankingBadge2.png");
+}
+
+#ranking-badge3 {
+    background-image: url("/static/images/rankingBadge3.png");
+}
+
+#ranking-badge {
+    background-color: rgba(0,0,0,.2);
+}
+
+.ranking-letter {
+    font-size: 25px;
+    padding-top: 10px;
+    color: #fff;
+}
+
+
+/*------------ Responsive ------------*/
+@media screen and (max-width: 640px) {
+    .picture {
+        height: 230px;
+        width: 300px;
+    }
+
+    .ranking-badge {
+        height: 30px;
+        width: 30px;
+        left: 12.5%;
+    }
+
+    .ranking-letter {
+        font-size: 18px;
+        padding-top: 4px;
+    }
+}
