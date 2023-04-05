@@ -71,6 +71,7 @@ p {
     margin-bottom: 10px;
     font-weight: bold;
     cursor: pointer;
+    box-shadow: 0 0 8px darkgreen;
 }
 
 .submit-button:hover {
