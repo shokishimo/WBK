@@ -1,10 +1,7 @@
 package controller
 
 import (
-	"context"
-	"github.com/shokishimo/WhatsTheBestKeyboard/database"
 	"github.com/shokishimo/WhatsTheBestKeyboard/model"
-	"go.mongodb.org/mongo-driver/bson"
 	"html/template"
 	"net/http"
 	"strconv"
@@ -52,35 +49,26 @@ func VerifyPassPost(w http.ResponseWriter, r *http.Request) error {
 	for i := 1; i <= 6; i++ {
 		inPasscode += r.FormValue("in" + strconv.Itoa(i))
 	}
-	// validate if the passcode is correct
-	db := database.Connect()
-	defer db.Disconnect()
-	db = db.GetAccessKeysToTemporaryUsersCollection()
 
-	// check if the input user already exists in the database
-	// Define the filter to find a specific document
-	var theUser model.User
-	filter := bson.M{"sessionid": inPasscode}
-	err := db.GetCollection().FindOne(context.TODO(), filter).Decode(&theUser)
-	// when the user with the passcode not found
+	// validate if the passcode is correct
+	theUser, err := model.FindUserWithPasscode(inPasscode)
 	if err != nil {
 		return err
 	}
 
 	// Once passcode is verified, create and set session id
-	sessionId := GenerateSessionID()
-	theUser.SessionID = Hash(sessionId)
+	sessionId1 := GenerateSessionID()
+	theUser.SessionID1 = Hash(sessionId1)
 
 	// save the sessionid and username in the client browser
-	SetSessionCookie(w, sessionId)
+	SetSessionCookie(w, sessionId1)
 	SetUsernameCookie(w, theUser.Username)
 	// delete email cookie
 	DeleteCookie(w, "email", theUser.Email)
 
 	// delete this user from the temporary and save user to the users table
-	err = theUser.DeleteUser(db)
-	db = db.GetAccessKeysToUsersCollection()
-	err = theUser.SaveUser(db)
+	err = theUser.DeleteUserFromTemporary()
+	err = theUser.SaveUser()
 	if err != nil {
 		return err
 	}

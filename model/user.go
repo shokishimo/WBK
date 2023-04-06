@@ -2,35 +2,34 @@ package model
 
 import (
 	"context"
-	"github.com/shokishimo/WhatsTheBestKeyboard/controller"
 	"github.com/shokishimo/WhatsTheBestKeyboard/database"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
 )
 
 type User struct {
-	Username        string     `json:"username"`
-	Email           string     `json:"email"`
-	Password        string     `json:"password"`
-	SessionID       []string   `json:"sessionid"`
-	ActiveUserCount int        `json:"activeusercount"`
-	MaxActiveUsers  int        `json:"maxactiveUsers"`
-	Fav             []Keyboard `json:"fav"`
-	BestKeys        []Keyboard `json:"bestkeys"`
-	WorstKeys       []Keyboard `json:"worstkeys"`
+	Username   string     `json:"username"`
+	Email      string     `json:"email"`
+	Password   string     `json:"password"`
+	SessionID1 string     `json:"sessionid1"`
+	SessionID2 string     `json:"sessionid2"`
+	SessionID3 string     `json:"sessionid3"`
+	Fav        []Keyboard `json:"fav"`
+	BestKeys   []Keyboard `json:"bestkeys"`
+	WorstKeys  []Keyboard `json:"worstkeys"`
 }
 
 func CreatNewUser(username string, email string, password string) User {
 	return User{
-		Username:        username,
-		Email:           email,
-		Password:        password,
-		SessionID:       []string{controller.GeneratePasscode()},
-		ActiveUserCount: 1,
-		MaxActiveUsers:  3,
-		Fav:             []Keyboard{},
-		BestKeys:        []Keyboard{},
-		WorstKeys:       []Keyboard{},
+		Username:   username,
+		Email:      email,
+		Password:   password,
+		SessionID1: "",
+		SessionID2: "",
+		SessionID3: "",
+		Fav:        []Keyboard{},
+		BestKeys:   []Keyboard{},
+		WorstKeys:  []Keyboard{},
 	}
 }
 
@@ -58,10 +57,12 @@ func (theUser User) SaveUserToTemporary() error {
 	return nil
 }
 
-// DeleteUser deletes the user from the specified collection
-func (theUser User) DeleteUser(db database.DB) error {
+// DeleteUserFromTemporary deletes the user from the temporary collection
+func (theUser User) DeleteUserFromTemporary() error {
+	db := database.Connect()
+	defer db.Disconnect()
+	db.GetAccessKeysToTemporaryUsersCollection()
 	filter := bson.M{"email": theUser.Email}
-
 	result, err := db.GetCollection().DeleteOne(context.TODO(), filter)
 	if err != nil {
 		return err
@@ -72,6 +73,7 @@ func (theUser User) DeleteUser(db database.DB) error {
 	return nil
 }
 
+// FindUserWithEmail searches in the database if the user with the email exists
 func FindUserWithEmail(email string) (User, error) {
 	db := database.Connect()
 	defer db.Disconnect()
@@ -86,6 +88,23 @@ func FindUserWithEmail(email string) (User, error) {
 	if err != nil {
 		return User{}, err
 	}
-
 	return res, nil
+}
+
+// FindUserWithPasscode is used to validate the user's passcode when signing up
+func FindUserWithPasscode(inPasscode string) (User, error) {
+	db := database.Connect()
+	defer db.Disconnect()
+	db = db.GetAccessKeysToTemporaryUsersCollection()
+
+	// check if the input user already exists in the database
+	// Define the filter to find a specific document
+	var theUser User
+	filter := bson.M{"sessionid1": inPasscode}
+	err := db.GetCollection().FindOne(context.TODO(), filter).Decode(&theUser)
+	// when the user with the passcode not found
+	if err != nil {
+		return User{}, err
+	}
+	return theUser, nil
 }

@@ -40,7 +40,8 @@ func signUpPost(w http.ResponseWriter, r *http.Request) string {
 	username := separatedEmail[len(separatedEmail)-2]
 
 	theUser := model.CreatNewUser(username, email, password)
-	passcode := theUser.SessionID[theUser.ActiveUserCount-1]
+	passcode := GeneratePasscode()
+	theUser.SessionID1 = passcode
 
 	// check if a user is already in the database
 	_, err := model.FindUserWithEmail(email)

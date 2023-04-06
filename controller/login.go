@@ -14,6 +14,19 @@ type LoginData struct {
 	ErrorString string
 }
 
+func LoginHandler(w http.ResponseWriter, r *http.Request) {
+	if r.Method == http.MethodGet {
+		renderLoginPage(w, LoginData{})
+	} else if r.Method == http.MethodPost {
+		res := handleLogin(w, r)
+		if res != "" {
+			renderLoginPage(w, LoginData{ErrorString: res})
+		}
+		// Redirect to account home page
+		http.Redirect(w, r, "/", http.StatusSeeOther)
+	}
+}
+
 func renderLoginPage(w http.ResponseWriter, data LoginData) {
 	tmpl, err := template.ParseFiles("static/public/login.html")
 	if err != nil {
@@ -26,19 +39,6 @@ func renderLoginPage(w http.ResponseWriter, data LoginData) {
 		w.WriteHeader(http.StatusInternalServerError)
 		_, _ = w.Write([]byte("Error: Failed to render login page"))
 		return
-	}
-}
-
-func LoginHandler(w http.ResponseWriter, r *http.Request) {
-	if r.Method == http.MethodGet {
-		renderLoginPage(w, LoginData{})
-	} else if r.Method == http.MethodPost {
-		res := handleLogin(w, r)
-		if res != "" {
-			renderLoginPage(w, LoginData{ErrorString: res})
-		}
-		// Redirect to account home page
-		http.Redirect(w, r, "/", http.StatusSeeOther)
 	}
 }
 
