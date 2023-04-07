@@ -76,7 +76,7 @@
                             <div class="ranking">
                                 <form action="/keyboarddetail" method="get" id=rank2>
                                     <div class="picture-container">
-                                        <img  class="picture" src={{.Url}} alt="keyboard image" onclick="keyboardDetail('{{js .Ranking}}')">
+                                        <img class="picture" src="{{.Url}}" alt="keyboard image" onclick="keyboardDetail('{{js .Ranking}}')">
                                         <div class="ranking-badge" id="ranking-badge2">
                                             <p class="ranking-letter"><input hidden="hidden" name="ranking" value={{.Ranking}}>{{.Ranking}}</p>
                                         </div>

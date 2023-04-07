@@ -2,6 +2,7 @@ package controller
 
 import (
 	"context"
+	"errors"
 	"github.com/shokishimo/WhatsTheBestKeyboard/database"
 	"github.com/shokishimo/WhatsTheBestKeyboard/model"
 	"go.mongodb.org/mongo-driver/bson"
@@ -51,27 +52,53 @@ func handleLogin(w http.ResponseWriter, r *http.Request) string {
 		return result
 	}
 
-	// check in database
+	theUser, err, sessionid := LoginSessions(email, password)
+	if err != nil {
+		return err.Error()
+	}
+
+	// when found
+	SetUsernameCookie(w, theUser.Username)
+	SetSessionCookie(w, sessionid)
+
+	return ""
+}
+
+func LoginSessions(email string, password string) (model.User, error, string) {
 	db := database.Connect()
 	defer db.Disconnect()
 	db = db.GetAccessKeysToUsersCollection()
 
-	// create a new sessionID
-	sessionID := GenerateSessionID()
+	var theUser model.User
+	filter := bson.M{"email": email, "password": Hash(password)}
+	err := db.GetCollection().FindOne(context.TODO(), filter).Decode(&theUser)
+	// when the user with the passcode not found
+	if err != nil {
+		return model.User{}, err, ""
+	}
+
+	sessionid := GenerateSessionID()
+	session := "session"
+	// When 3 devices are filled
+	if theUser.SessionID1 != "" && theUser.SessionID2 != "" && theUser.SessionID3 != "" {
+		return model.User{}, errors.New("one can access their account with up to 3 devices. No more device is available"), ""
+	} else if theUser.SessionID1 == "" {
+		session += "1"
+	} else if theUser.SessionID2 == "" {
+		session += "2"
+	} else if theUser.SessionID3 == "" {
+		session += "3"
+	}
 
 	var res model.User
 	// Define opt to return the updated document
 	opt := options.FindOneAndUpdate().SetReturnDocument(options.After)
-	filter := bson.M{"email": email, "password": Hash(password)}
-	update := bson.M{"$set": bson.M{"sessionid": Hash(sessionID)}}
-	err := db.GetCollection().FindOneAndUpdate(context.TODO(), filter, update, opt).Decode(&res)
+	filter = bson.M{"email": email, "password": Hash(password)}
+	update := bson.M{"$set": bson.M{session: Hash(sessionid)}}
+	err = db.GetCollection().FindOneAndUpdate(context.TODO(), filter, update, opt).Decode(&res)
 	if err != nil {
-		return "Error happened during some executions to database: " + err.Error()
+		return model.User{}, err, ""
 	}
 
-	// when found
-	SetUsernameCookie(w, res.Username)
-	SetSessionCookie(w, sessionID)
-
-	return ""
+	return res, nil, sessionid
 }

@@ -60,7 +60,7 @@ func VerifyPassPost(w http.ResponseWriter, r *http.Request) error {
 	sessionId1 := GenerateSessionID()
 	theUser.SessionID1 = Hash(sessionId1)
 
-	// save the sessionid and username in the client browser
+	// save the sessionid1 and username in the client browser
 	SetSessionCookie(w, sessionId1)
 	SetUsernameCookie(w, theUser.Username)
 	// delete email cookie

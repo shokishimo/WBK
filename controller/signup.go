@@ -39,7 +39,7 @@ func signUpPost(w http.ResponseWriter, r *http.Request) string {
 	separatedEmail := strings.Split(email, "@")
 	username := separatedEmail[len(separatedEmail)-2]
 
-	theUser := model.CreatNewUser(username, email, password)
+	theUser := model.CreatNewUser(username, email, Hash(password))
 	passcode := GeneratePasscode()
 	theUser.SessionID1 = passcode
 
