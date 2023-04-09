@@ -50,7 +50,7 @@ func signUpPost(w http.ResponseWriter, r *http.Request) string {
 	}
 
 	// save the user temporary
-	err = theUser.SaveUserToTemporary()
+	err = model.SaveUserToTemporary(theUser)
 	if err != nil {
 		return "Failed to save the user"
 	}

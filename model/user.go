@@ -34,7 +34,7 @@ func CreatNewUser(username string, email string, password string) User {
 }
 
 // SaveUser stores the user to the specified collection
-func (theUser User) SaveUser() error {
+func SaveUser(theUser User) error {
 	db := database.Connect()
 	defer db.Disconnect()
 	db.GetAccessKeysToUsersCollection()
@@ -46,7 +46,7 @@ func (theUser User) SaveUser() error {
 }
 
 // SaveUserToTemporary stores the user to the temporary collection
-func (theUser User) SaveUserToTemporary() error {
+func SaveUserToTemporary(theUser User) error {
 	db := database.Connect()
 	defer db.Disconnect()
 	db.GetAccessKeysToTemporaryUsersCollection()
@@ -58,7 +58,7 @@ func (theUser User) SaveUserToTemporary() error {
 }
 
 // DeleteUserFromTemporary deletes the user from the temporary collection
-func (theUser User) DeleteUserFromTemporary() error {
+func DeleteUserFromTemporary(theUser User) error {
 	db := database.Connect()
 	defer db.Disconnect()
 	db.GetAccessKeysToTemporaryUsersCollection()

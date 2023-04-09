@@ -67,8 +67,8 @@ func VerifyPassPost(w http.ResponseWriter, r *http.Request) error {
 	DeleteCookie(w, "email", theUser.Email)
 
 	// delete this user from the temporary and save user to the users table
-	err = theUser.DeleteUserFromTemporary()
-	err = theUser.SaveUser()
+	err = model.DeleteUserFromTemporary(theUser)
+	err = model.SaveUser(theUser)
 	if err != nil {
 		return err
 	}
