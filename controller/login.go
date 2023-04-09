@@ -67,7 +67,7 @@ func handleLogin(w http.ResponseWriter, r *http.Request) string {
 func LoginSessions(email string, password string) (model.User, error, string) {
 	db := database.Connect()
 	defer db.Disconnect()
-	db = db.GetAccessKeysToUsersCollection()
+	db.GetAccessKeysToUsersCollection()
 
 	var theUser model.User
 	filter := bson.M{"email": email, "password": Hash(password)}

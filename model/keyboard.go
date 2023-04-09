@@ -28,7 +28,7 @@ type Keyboard struct {
 func FindKeyboardWithNameAndRanking(name string, rank string) (error, Keyboard) {
 	db := database.Connect()
 	defer db.Disconnect()
-	db = db.GetAccessKeysToKeyboardsCollection()
+	db.GetAccessKeysToKeyboardsCollection()
 
 	// find keyboard
 	var theKeyboard Keyboard
@@ -45,8 +45,7 @@ func FindKeyboardWithNameAndRanking(name string, rank string) (error, Keyboard) 
 func GetRanks(topHowMany int) []Keyboard {
 	db := database.Connect()
 	defer db.Disconnect()
-	// Obtain collection
-	db = db.GetAccessKeysToKeyboardsCollection()
+	db.GetAccessKeysToKeyboardsCollection()
 
 	// extract keyboard data from database based on their net ranking
 	var keyboards []Keyboard

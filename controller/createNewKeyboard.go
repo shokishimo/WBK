@@ -25,8 +25,7 @@ func CreateNewKeyboardHandler(w http.ResponseWriter, r *http.Request) {
 
 	db := database.Connect()
 	defer db.Disconnect()
-	// Obtain collection
-	db = db.GetAccessKeysToKeyboardsCollection()
+	db.GetAccessKeysToKeyboardsCollection()
 
 	// begin insert data
 	_, err = db.GetCollection().InsertOne(context.TODO(), keyboard)

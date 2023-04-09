@@ -34,11 +34,11 @@ func CreatNewUser(username string, email string, password string) User {
 }
 
 // SaveUser stores the user to the specified collection
-func SaveUser(theUser User) error {
+func (theUser *User) SaveUser() error {
 	db := database.Connect()
 	defer db.Disconnect()
 	db.GetAccessKeysToUsersCollection()
-	_, err := db.GetCollection().InsertOne(context.TODO(), theUser)
+	_, err := db.GetCollection().InsertOne(context.TODO(), *theUser)
 	if err != nil {
 		return err
 	}
@@ -46,11 +46,12 @@ func SaveUser(theUser User) error {
 }
 
 // SaveUserToTemporary stores the user to the temporary collection
-func SaveUserToTemporary(theUser User) error {
+func (theUser *User) SaveUserToTemporary() error {
 	db := database.Connect()
 	defer db.Disconnect()
 	db.GetAccessKeysToTemporaryUsersCollection()
-	_, err := db.GetCollection().InsertOne(context.TODO(), theUser)
+
+	_, err := db.GetCollection().InsertOne(context.TODO(), *theUser)
 	if err != nil {
 		return err
 	}
@@ -58,7 +59,7 @@ func SaveUserToTemporary(theUser User) error {
 }
 
 // DeleteUserFromTemporary deletes the user from the temporary collection
-func DeleteUserFromTemporary(theUser User) error {
+func (theUser *User) DeleteUserFromTemporary() error {
 	db := database.Connect()
 	defer db.Disconnect()
 	db.GetAccessKeysToTemporaryUsersCollection()
@@ -77,7 +78,7 @@ func DeleteUserFromTemporary(theUser User) error {
 func FindUserWithEmail(email string) (User, error) {
 	db := database.Connect()
 	defer db.Disconnect()
-	db = db.GetAccessKeysToUsersCollection()
+	db.GetAccessKeysToUsersCollection()
 
 	// check if the input user already exists in the database
 	// Define the filter to find a specific document
@@ -95,7 +96,7 @@ func FindUserWithEmail(email string) (User, error) {
 func FindUserWithPasscode(inPasscode string) (User, error) {
 	db := database.Connect()
 	defer db.Disconnect()
-	db = db.GetAccessKeysToTemporaryUsersCollection()
+	db.GetAccessKeysToTemporaryUsersCollection()
 
 	// check if the input user already exists in the database
 	// Define the filter to find a specific document

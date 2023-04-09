@@ -18,7 +18,7 @@ func LogoutHandler(w http.ResponseWriter, r *http.Request) {
 	hashedId := Hash(sessionId)
 	db := database.Connect()
 	defer db.Disconnect()
-	db = db.GetAccessKeysToUsersCollection()
+	db.GetAccessKeysToUsersCollection()
 
 	filter := bson.M{"sessionid": hashedId}
 	update := bson.M{"$set": bson.M{"sessionid": ""}}
