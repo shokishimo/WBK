@@ -82,14 +82,14 @@ func FindUserWithEmail(email string) (User, error) {
 
 	// check if the input user already exists in the database
 	// Define the filter to find a specific document
-	var res User
+	var res User = User{}
 	filter := bson.M{"email": email}
 	err := db.GetCollection().FindOne(context.TODO(), filter).Decode(&res)
 	// when the user with the sessionID found
-	if err != nil {
-		return User{}, err
+	if err == nil {
+		return res, err
 	}
-	return res, nil
+	return res, err
 }
 
 // FindUserWithPasscode is used to validate the user's passcode when signing up
