@@ -78,7 +78,7 @@ func LoginSessions(email string, password string) (model.User, error, string) {
 	}
 
 	sessionid := GenerateSessionID()
-	session := "session"
+	session := "sessionid"
 	// When 3 devices are filled
 	if theUser.SessionID1 != "" && theUser.SessionID2 != "" && theUser.SessionID3 != "" {
 		return model.User{}, errors.New("one can access their account with up to 3 devices. No more device is available"), ""
