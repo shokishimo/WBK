@@ -8,11 +8,14 @@ import (
 )
 
 func LogoutHandler(w http.ResponseWriter, r *http.Request) {
-	sessionId := GetSessionCookie(r)
+	sessionNum := GetSessionNumFromCookie(r)
+	sessionId := GetSessionCookie(r, sessionNum)
 
+	key := "sessionid" + sessionNum
 	// delete session handling cookie from the browser
 	DeleteCookie(w, "username", "")
-	DeleteCookie(w, "sessionid", "")
+	DeleteCookie(w, key, "")
+	DeleteCookie(w, "sessionNum", "")
 
 	// delete the session id of the user in the database
 	hashedId := Hash(sessionId)
@@ -20,10 +23,9 @@ func LogoutHandler(w http.ResponseWriter, r *http.Request) {
 	defer db.Disconnect()
 	db.GetAccessKeysToUsersCollection()
 
-	filter := bson.M{"sessionid": hashedId}
-	update := bson.M{"$set": bson.M{"sessionid": ""}}
+	filter := bson.M{"sessionid" + sessionNum: hashedId}
+	update := bson.M{"$set": bson.M{"sessionid" + sessionNum: ""}}
 	result, err := db.GetCollection().UpdateOne(context.TODO(), filter, update)
-
 	// when an error happened in the transaction
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
@@ -31,9 +33,9 @@ func LogoutHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	// when the user with the username and password not found
-	if result.MatchedCount == 0 {
+	if result.ModifiedCount == 0 {
 		w.WriteHeader(http.StatusInternalServerError)
-		_, _ = w.Write([]byte("Error: user not found"))
+		_, _ = w.Write([]byte("Error: log out transaction error"))
 		return
 	}
 

@@ -52,19 +52,15 @@ func handleLogin(w http.ResponseWriter, r *http.Request) string {
 		return result
 	}
 
-	theUser, err, sessionid := LoginSessions(email, password)
+	err := LoginSessions(w, email, password)
 	if err != nil {
 		return err.Error()
 	}
 
-	// when found
-	SetUsernameCookie(w, theUser.Username)
-	SetSessionCookie(w, sessionid)
-
 	return ""
 }
 
-func LoginSessions(email string, password string) (model.User, error, string) {
+func LoginSessions(w http.ResponseWriter, email string, password string) error {
 	db := database.Connect()
 	defer db.Disconnect()
 	db.GetAccessKeysToUsersCollection()
@@ -74,21 +70,22 @@ func LoginSessions(email string, password string) (model.User, error, string) {
 	err := db.GetCollection().FindOne(context.TODO(), filter).Decode(&theUser)
 	// when the user with the passcode not found
 	if err != nil {
-		return model.User{}, err, ""
+		return err
 	}
 
 	sessionid := GenerateSessionID()
-	session := "sessionid"
+	var sessionNum string
 	// When 3 devices are filled
 	if theUser.SessionID1 != "" && theUser.SessionID2 != "" && theUser.SessionID3 != "" {
-		return model.User{}, errors.New("one can access their account with up to 3 devices. No more device is available"), ""
+		return errors.New("one can access their account with up to 3 devices. No more device is available")
 	} else if theUser.SessionID1 == "" {
-		session += "1"
+		sessionNum = "1"
 	} else if theUser.SessionID2 == "" {
-		session += "2"
+		sessionNum = "2"
 	} else if theUser.SessionID3 == "" {
-		session += "3"
+		sessionNum = "3"
 	}
+	session := "sessionid" + sessionNum
 
 	var res model.User
 	// Define opt to return the updated document
@@ -97,8 +94,12 @@ func LoginSessions(email string, password string) (model.User, error, string) {
 	update := bson.M{"$set": bson.M{session: Hash(sessionid)}}
 	err = db.GetCollection().FindOneAndUpdate(context.TODO(), filter, update, opt).Decode(&res)
 	if err != nil {
-		return model.User{}, err, ""
+		return err
 	}
 
-	return res, nil, sessionid
+	SetUsernameCookie(w, theUser.Username)
+	SetSessionCookie(w, sessionNum, sessionid)
+	SetSessionNumInCookie(w, sessionNum)
+
+	return nil
 }

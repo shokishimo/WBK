@@ -50,7 +50,6 @@ func (theUser *User) SaveUserToTemporary() error {
 	db := database.Connect()
 	defer db.Disconnect()
 	db.GetAccessKeysToTemporaryUsersCollection()
-
 	_, err := db.GetCollection().InsertOne(context.TODO(), *theUser)
 	if err != nil {
 		return err
@@ -79,7 +78,6 @@ func FindUserWithEmail(email string) (User, error) {
 	db := database.Connect()
 	defer db.Disconnect()
 	db.GetAccessKeysToUsersCollection()
-
 	// check if the input user already exists in the database
 	// Define the filter to find a specific document
 	var res User = User{}
@@ -97,7 +95,6 @@ func FindUserWithPasscode(inPasscode string) (User, error) {
 	db := database.Connect()
 	defer db.Disconnect()
 	db.GetAccessKeysToTemporaryUsersCollection()
-
 	// check if the input user already exists in the database
 	// Define the filter to find a specific document
 	var theUser User

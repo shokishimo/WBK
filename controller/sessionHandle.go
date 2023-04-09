@@ -22,10 +22,31 @@ func GenerateSessionID() string {
 	return sessionID
 }
 
-// SetSessionCookie sets a session cookie
-func SetSessionCookie(w http.ResponseWriter, sid string) {
+func SetSessionNumInCookie(w http.ResponseWriter, num string) {
 	cookie := http.Cookie{
-		Name:     "sessionid",
+		Name:     "sessionNum",
+		Value:    num,
+		Expires:  time.Now().Add(3600 * 24 * 3 * time.Second), // 3 days
+		HttpOnly: true,
+		Secure:   true,
+		SameSite: http.SameSiteLaxMode, // TODO: change this to Strict (maybe)
+	}
+	http.SetCookie(w, &cookie)
+}
+
+func GetSessionNumFromCookie(r *http.Request) string {
+	cookie, err := r.Cookie("sessionNum")
+	if err != nil {
+		// when there is no cookie set to the browser
+		return ""
+	}
+	return cookie.Value
+}
+
+// SetSessionCookie sets a session cookie
+func SetSessionCookie(w http.ResponseWriter, no string, sid string) {
+	cookie := http.Cookie{
+		Name:     "sessionid" + no,
 		Value:    sid,
 		Expires:  time.Now().Add(3600 * 24 * 3 * time.Second), // 3 days
 		HttpOnly: true,
@@ -36,8 +57,8 @@ func SetSessionCookie(w http.ResponseWriter, sid string) {
 }
 
 // GetSessionCookie obtains sessionID inside the cookie
-func GetSessionCookie(r *http.Request) string {
-	cookie, err := r.Cookie("sessionid")
+func GetSessionCookie(r *http.Request, no string) string {
+	cookie, err := r.Cookie("sessionid" + no)
 	if err != nil {
 		// when there is no cookie set to the browser
 		return ""

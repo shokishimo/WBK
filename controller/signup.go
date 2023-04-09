@@ -61,7 +61,7 @@ func signUpPost(w http.ResponseWriter, r *http.Request) string {
 		return "Failed to send mail to the user: " + err.Error()
 	}
 
-	// set email to the browser so that a user can let the system to resend their passcode in case there is a issue
+	// set email to the browser so that a user can let the system resend their passcode in case there is an issue
 	SetEmailCookie(w, email)
 	return ""
 }
