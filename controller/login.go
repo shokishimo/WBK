@@ -7,7 +7,6 @@ import (
 	"github.com/shokishimo/WhatsTheBestKeyboard/model"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo/options"
-	"html/template"
 	"net/http"
 )
 
@@ -29,18 +28,7 @@ func LoginHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func renderLoginPage(w http.ResponseWriter, data LoginData) {
-	tmpl, err := template.ParseFiles("static/public/login.html")
-	if err != nil {
-		w.WriteHeader(http.StatusInternalServerError)
-		_, _ = w.Write([]byte("Error: Failed to get login page"))
-		return
-	}
-	err = tmpl.Execute(w, data)
-	if err != nil {
-		w.WriteHeader(http.StatusInternalServerError)
-		_, _ = w.Write([]byte("Error: Failed to render login page"))
-		return
-	}
+	RenderPageWithStringData(w, "static/public/login.html", data.ErrorString)
 }
 
 func handleLogin(w http.ResponseWriter, r *http.Request) string {

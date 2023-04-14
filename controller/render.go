@@ -19,3 +19,18 @@ func RenderPage(w http.ResponseWriter, path string) {
 		return
 	}
 }
+
+func RenderPageWithStringData(w http.ResponseWriter, path string, data string) {
+	tmpl, err := template.ParseFiles(path)
+	if err != nil {
+		w.WriteHeader(http.StatusInternalServerError)
+		_, _ = w.Write([]byte(err.Error()))
+		return
+	}
+	err = tmpl.Execute(w, data)
+	if err != nil {
+		w.WriteHeader(http.StatusInternalServerError)
+		_, _ = w.Write([]byte(err.Error()))
+		return
+	}
+}
